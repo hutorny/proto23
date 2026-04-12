@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package tests.vectors;
+
+message Bool_v {
+  repeated bool v = 1;
+}
+
+message Int_32v {
+  repeated int32 v = 1;
+}
+
+message SInt_32v {
+  repeated sint32 v = 1;
+}
+
+message UInt_32v {
+  repeated uint32 v = 1;
+}
+
+message Fixed_32v {
+  repeated fixed32 v = 1;
+}
+
+message SFixed_32v {
+  repeated sfixed32 v = 1;
+}
+
+message Int_64v {
+  repeated int64 v = 1;
+}
+
+message SInt_64v {
+  repeated sint64 v = 1;
+}
+
+message UInt_64v {
+  repeated uint64 v = 1;
+}
+
+message Fixed_64v {
+  repeated fixed64 v = 1;
+}
+
+message SFixed_64v {
+  repeated sfixed64 v = 1;
+}
+
+message Float_v {
+  repeated float v = 1;
+}
+
+message Double_v {
+  repeated double v = 1;
+}
+
+
+message Bool_u {
+  repeated bool v = 1 [packed = false];
+}
+
+message Int_32u {
+  repeated int32 v = 1 [packed = false];
+}
+
+message SInt_32u {
+  repeated sint32 v = 1 [packed = false];
+}
+
+message UInt_32u {
+  repeated uint32 v = 1 [packed = false];
+}
+
+message Fixed_32u {
+  repeated fixed32 v = 1 [packed = false];
+}
+
+message SFixed_32u {
+  repeated sfixed32 v = 1 [packed = false];
+}
+
+message Int_64u {
+  repeated int64 v = 1 [packed = false];
+}
+
+message SInt_64u {
+  repeated sint64 v = 1 [packed = false];
+}
+
+message UInt_64u {
+  repeated uint64 v = 1 [packed = false];
+}
+
+message Fixed_64u {
+  repeated fixed64 v = 1 [packed = false];
+}
+
+message SFixed_64u {
+  repeated sfixed64 v = 1 [packed = false];
+}
+
+message Float_u {
+  repeated float v = 1 [packed = false];
+}
+
+message Double_u {
+  repeated double v = 1 [packed = false];
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package tests.tuples;
+
+enum Enum {
+  Zero = 0;
+  One = 1;
+  Many = 10;
+}
+
+message Tuple_3 {
+  bool key = 2;
+  int32 v = 3;  
+  string string_value = 5;
+}
+
+message Tuple_4 {
+  string string_value = 5;
+  uint32 key = 6;
+  fixed32 value = 8;
+  string text = 9;
+}
+
+message Tuple_5 {
+  string string_value = 5;
+  uint32 key = 6;
+  fixed32 value = 8;
+  string text = 1023;
+  bool flag = 1;
+}
+
+message Tuple_6 {
+  Enum enum_value = 128;
+  repeated string memo = 256;
+  repeated fixed32 value = 384;
+  bool flags = 512; //FIXME repeated to avoid vector<bool>
+  repeated Enum enums = 640;
+}

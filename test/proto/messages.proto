@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package tests.messages;
+
+enum Status {
+  NOTOK = 0;
+  OK = 42;
+}
+message Inner {
+  Status status =1;
+  sint32 v =2;
+}
+
+message Outer {
+  Inner inner =1;
+  sint32 v =2;
+}
+
+message Combined {
+  message Local {
+		sint32 v =1;
+		string text =2;
+	}
+	Inner inner =1;
+	Outer outer =2;
+  Local local =3;
+  sint32 v =4;
+}
+
+message OneOf {
+  sint32 v = 1;
+  oneof one {
+    double value = 2;
+    sint32 count = 3;
+  }
+}
+
+message Map {
+  sint32 v = 1;
+  map<sint32,string> dict = 2;
+}
+
+message Packed {
+  repeated Outer v = 1 [packed = false];
+}

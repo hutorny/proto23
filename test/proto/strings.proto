@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package tests.strings;
+
+message String {
+  string v = 1;
+}
+
+message Bytes {
+  bytes v = 1;
+}
+
+message Excessive {
+  string v =1;
+  fixed32 excessive = 2;
+}

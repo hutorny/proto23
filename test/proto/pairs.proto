@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tests.pairs;
+
+message Bool_SInt {
+  bool k = 2;
+  sint32 v = 3;
+}
+
+message SInt_String {
+  sint32 k = 4;
+  string v = 5;
+}
+
+message UInt_Fixed {
+  uint32 k = 6;
+  fixed32 v = 8;
+}
+
+message Double_SFixed {
+  double k = 11;
+  sfixed32 v = 1;
+}

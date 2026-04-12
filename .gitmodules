@@ -1,0 +1,12 @@
+[submodule "3rd/ut"]
+	path = test/3rd/ut
+	url = git@github.com:boost-ext/ut.git
+[submodule "3rd/nameof"]
+	path = test/3rd/nameof
+	url = git@github.com:hutorny/nameof.git
+[submodule "test/3rd/inplace_vector"]
+	path = test/3rd/inplace_vector
+	url = git@github.com:bemanproject/inplace_vector.git
+[submodule "test/3rd/inplace_string"]
+	path = test/3rd/inplace_string
+	url = https://github.com/mpusz/inplace_string.git

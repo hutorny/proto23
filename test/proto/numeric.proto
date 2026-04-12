@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package tests.numeric;
+
+message Bool_ {
+  bool v = 1;
+}
+
+message Int_32 {
+  int32 v = 1;
+}
+
+message SInt_32 {
+  sint32 v = 1;
+}
+
+message UInt_32 {
+  uint32 v = 1;
+}
+
+message Fixed_32 {
+  fixed32 v = 1;
+}
+
+message SFixed_32 {
+  sfixed32 v = 1;
+}
+
+//
+message Int_64 {
+  int64 v = 1;
+}
+
+message SInt_64 {
+  sint64 v = 1;
+}
+
+message UInt_64 {
+  uint64 v = 1;
+}
+
+message Fixed_64 {
+  fixed64 v = 1;
+}
+
+message SFixed_64 {
+  sfixed64 v = 1;
+}
+
+message Float_ {
+  float v = 1;
+}
+
+
+message Double_ {
+  double v = 1;
+}
