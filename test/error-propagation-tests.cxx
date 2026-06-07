@@ -14,7 +14,6 @@
 // Nested message test structs
 // ---------------------------------------------------------------------------
 #include "functional-tests.h"
-#include <spanstream>
 
 namespace testing {
 using namespace boost::ut;

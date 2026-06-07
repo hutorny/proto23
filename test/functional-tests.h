@@ -6,6 +6,7 @@
 
 #include <string_view>
 #include <string>
+#include <spanstream>
 #include <source_location>
 
 namespace testing {
