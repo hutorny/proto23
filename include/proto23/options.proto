@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+package proto23;
+
+enum Inplace {
+    UNSPECIFIED = 0;
+    YES = 1;
+    NO = 2;
+}
+
+extend google.protobuf.FieldOptions {
+    // If YES, generate vector, string or message field  inplace
+    Inplace inplace = 68000;
+    uint32 capacity = 68001;
+}
+
+extend google.protobuf.FileOptions {
+    // By default generate all vector, string or PDO message fields inplace
+    Inplace inplace_string           = 68000;
+    uint32 default_string_capacity   = 68001; // 64 by default
+    Inplace inplace_repeated         = 68002;
+    uint32 default_repeated_capacity = 68003; // 16 by default
+    Inplace inplace_message          = 68004;
+}

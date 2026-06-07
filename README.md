@@ -125,6 +125,90 @@ struct ADCReaidngs {
 
 proto23 supports generated code when you want it—but doesn't require it.
 
+## Code generation plugin
+
+proto23 provides a protobuf compiler plugin for generating proto23-enabled code ffrom proto files.
+
+### Dependencies
+
+protoc23 plugin depends on protobuf compiler, which can be installed with command
+
+```
+sudo apt install -y protobuf-compiler
+```
+
+### Building plugin
+
+Run `make plugin`
+
+### Testing plugin
+
+Run `make plugin-test`
+
+### Installing plugin
+
+Run `sudo make plugin-install`
+
+This command installs plugin at `/usr/local/bin`. To change the installation directory, 
+set variables `DESTDIR`, and `PREFIX` e.g.
+
+```bash
+DESTDIR=~ PREFIX=.local make plugin-install
+```
+
+install at `~/.local/bin`. The installation directory should be in the PATH, so that `protoc` finds it.
+
+### Using plugin
+
+Run `protoc` with option  `--proto23_out=<OUTPUT DIRECTORY>`
+
+### Inplace message fields
+
+By default, proto23 plugin generates plain struct members for fields of integral/float types, and nested messages
+Repeated fields declared as `std::vector`, `string` as `std::string`,
+`bytes` as `std::vector<std::byte>`, other messages as `std::unique_ptr<MyMessage>`.
+This behavior can be changed with proto23 options and protobuf `optional`.
+
+| Field type or option| Generated Code                           |
+|---------------------|------------------------------------------|
+| integral            | plain member: `proto23::fixed23 myfield;` or `std::int64 myfield;` |
+| Enum type           | plain member:  `Enum myfield;` |
+| `string`           | `std::string myfield;` |
+| `bytes`            | `std::vector<std::byte> myfield;` |
+| `repeated` *Type*  | `std::vector<Type> myfield;` |
+| Nested *Message*    | `Message myfield;` |
+| Other *Message*     | `std::unique_ptr<Message> myfield;` |
+| `optional` integral| `std::optional<integral> myfield;` |
+| `optional` Enum    | `std::optional<Enum> myfield;` |
+| `optional` *Nested*| `std::optional<Nested> myfield;` |
+| `optional` *Message*| `std::unique_ptr<Message> myfield;` |
+| `string` [**inplace**] | `inplace_string<capacity> myfield;` |
+| `bytes` [**inplace**] | `inplace_vector<std::byte,capacity> myfield;` |
+| `repeated` *Type* [**inplace**] | `inplace_vector<Type, capacity> myfield;` |
+| *Message* [**inplace**] | `Message myfield;` |
+| `optional` *Message* [**inplace**] | `std::optional<Message> myfield;` | 
+
+Where **inplace** stands for proto23 options `[(proto23.inplace)=YES, (proto23.capacity)=64]`
+Capacity is optional, defaulted to 64 for `string` and `bytes`, and 16 for `repeated`. For other types capacity 
+is silently ignored.
+
+[inplace_vector](https://github.com/bemanproject/inplace_vector) and 
+[inplace_string](https://github.com/mpusz/inplace_string)
+are third-party components, aliased by proto23.
+
+### File level inplace options
+
+proto23 allows defining default inplace options at file level:
+
+```
+option (proto23.inplace_string) = YES;
+option (proto23.default_string_capacity) = 100;
+option (proto23.inplace_repeated) = YES;
+option (proto23.default_repeated_capacity) = 50;
+option (proto23.inplace_message) = YES;
+```
+These options change default 
+
 ## License
 
 MIT — see LICENSE for details.
