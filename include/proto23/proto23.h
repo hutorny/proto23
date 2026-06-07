@@ -677,6 +677,10 @@ deserialize_message(std::istream& in, Message& msg,
 /// Forward declaration so optional<T>/unique_ptr<T> overloads can call it.
 template<proto23::message Message>
 [[nodiscard]] field_result deserialize(std::istream& in, Message& msg);
+template<class Message>
+requires (std::is_empty_v<Message>)
+[[nodiscard]] field_result deserialize(std::istream& in, Message& msg);
+
 
 template<typename Dest>
 constexpr auto ptr_cast(auto pointer) {
@@ -842,6 +846,15 @@ template<proto23::message Message>
 [[nodiscard]] field_result deserialize(std::istream& in, Message& msg) {
     const auto r = deserialize_message(in, msg, &get_eod);
     return field_result { any(r) ? quantity::some : quantity::none, r.errors() };
+}
+
+// --- Empty message: reads the length prefix then ignore the message body
+
+template<class Message>
+requires (std::is_empty_v<Message>)
+[[nodiscard]] field_result deserialize(std::istream& in, Message&) {
+    in.ignore(static_cast<std::streamsize>(read_length(in)));
+    return field_result { quantity::some, {} };
 }
 
 // =============================================================================
@@ -1135,6 +1148,16 @@ void serialize_value(std::ostream& out, int num, const Array& v, skippable maysk
 /// Forward declaration so optional<T>/unique_ptr<T> overloads can call it.
 template<proto23::message Msg>
 void serialize_value(std::ostream& out, int num, const Msg& msg, skippable mayskip);
+
+/// Empty messages
+template<class Msg>
+requires (std::is_empty_v<Msg>)
+void serialize_value(std::ostream& out, int num, const Msg&, skippable mayskip) {
+    if (mayskip == skippable::yes) return;
+    write_id_type(out, num, data_type::lengthy);
+    write_length(out, 0);
+}
+
 
 // ---- optional<T> ----
 
