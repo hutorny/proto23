@@ -209,6 +209,18 @@ option (proto23.inplace_message) = YES;
 ```
 These options change default 
 
+## Tested with
+
+### Linux
+
+|             | c++23  |
+|-------------|--------|
+| g++-13      |  PASS  |
+| g++-14      |  PASS  |
+| clang++-18  |  PASS  |
+| clang++-19  |  PASS  |
+| clang++-20  |  PASS  |
+
 ## License
 
 MIT — see LICENSE for details.

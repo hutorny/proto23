@@ -1,0 +1,28 @@
+name: C++ CI
+
+on:
+  push:
+    branches: [ "main", "feature/**" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        cxx: [g++-13, g++-14, clang++-18, clang++-19, clang++-20]
+    steps:
+    - uses: actions/checkout@v6
+      with: 
+        submodules: true
+    - name: install dependencies
+      run: sudo apt-get update && sudo apt-get install -y protobuf-compiler ${{ matrix.cxx }}
+    - name: build tests
+      run: make test -j$(nproc) COMPILER=${{ matrix.cxx }}
+    - name: run tests
+      run: make run COMPILER=${{ matrix.cxx }}
+    - name: build plugin
+      run: make plugin COMPILER=${{ matrix.cxx }}
+    - name: test plugin
+      run: make test-plugin COMPILER=${{ matrix.cxx }}
