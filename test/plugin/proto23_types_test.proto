@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+message IntegralTypesTest {
+  sint32 std_int32 = 1;
+  int32 proto23_int32 = 2;
+  uint32 std_uint32 = 3;
+  fixed32 proto23_fixed32 = 4;
+  sfixed32 proto23_sfixed32 = 5;
+  sint64 std_int64 = 6;
+  int64 proto23_int64 = 7;
+  uint64 std_uint64 = 8;
+  fixed64 proto23_fixed64 = 9;
+  bool plain_bool = 10;
+}
+
+message FloatTypesTest {
+  float f = 1;
+  double d = 2;
+}
+
+message StringTypesTest {
+  string s = 1;
+  bytes b = 2;
+  repeated bytes r = 3;
+}

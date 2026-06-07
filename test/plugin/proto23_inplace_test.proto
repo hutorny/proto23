@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+import "proto23/options.proto";
+
+message Outer {
+  sint32 int32 = 1;
+}
+
+message and {
+  sint32 int32 = 1;
+}
+
+message InplaceByDefaultTest {
+  message Inner {
+    sint32 int32 = 1;
+  }
+  Outer unique_ptr_OuterPDO = 1;
+  Inner inplace_inner = 3;
+  NotComplete unique_ptr_NotComplete = 5;
+  optional Inner optional_Inner = 6;
+  optional NotComplete unique_ptr_NotComplete2 = 8;
+}
+
+message ExplicitInplace {
+  message Inner {
+    sint32 int32 = 1;
+  }
+
+  Outer inplace_Outer = 1 [(proto23.inplace)=YES];
+  Inner inplace_Inner = 3 [(proto23.inplace)=YES];
+  NotComplete unique_ptr_NotComplete = 5 [(proto23.inplace)=YES];
+  optional Inner optional_Inner = 6 [(proto23.inplace)=YES];
+  optional NotComplete unique_ptr_NotComplete2 = 8 [(proto23.inplace)=YES];
+  optional and optional_and_ = 9 [(proto23.inplace)=YES];
+  and inplace_and_ = 10 [(proto23.inplace)=YES];
+  repeated Inner inplace_vector_Inner = 11 [(proto23.inplace)=YES, (proto23.capacity)=100];
+  string inplace_string_200 = 12 [(proto23.inplace)=YES, (proto23.capacity)=200]; 
+  repeated NotComplete std_vector_NotComplete = 13 [(proto23.inplace)=YES, (proto23.capacity)=100];
+}
+
+message NotComplete {
+  sint32 int32 = 1;
+}
+

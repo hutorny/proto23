@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+message Msg {
+  sint32 int32 = 1;
+}
+
+enum Enum {
+  none = 0;
+}
+
+message ChangeMeaningToField {
+  Msg msg1 = 1;
+  bool Msg = 2;
+  Enum enum1 = 3;
+  bool Enum = 4;
+}

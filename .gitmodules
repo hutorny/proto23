@@ -10,3 +10,6 @@
 [submodule "test/3rd/inplace_string"]
 	path = test/3rd/inplace_string
 	url = https://github.com/mpusz/inplace_string.git
+[submodule "test/3rd/protobuf"]
+	path = test/3rd/protobuf
+	url = https://github.com/protocolbuffers/protobuf.git

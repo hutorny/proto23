@@ -1,0 +1,7 @@
+#include "test_reserved_enum_lower.proto23.h"
+#include "test_reserved_enum_upper.proto23.h"
+#include "test_reserved_enum_value_lower.proto23.h"
+#include "test_reserved_enum_value_upper.proto23.h"
+#include "test_reserved_message_lower.proto23.h"
+#include "test_reserved_message_upper.proto23.h"
+#include "test_reserved_field_lower.proto23.h"

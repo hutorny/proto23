@@ -3,6 +3,7 @@
 /Release/
 /Examples/
 /Plugin/
+/Plugin-clang/
 /.project
 /.cproject
 /.settings/
