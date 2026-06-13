@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2026 Eugene Hutorny <eugene@hutorny.in.ua>
  *
- * proto/proto.h - C++23 Protobuf serializer/deserializer with explicit field listing
+ * proto23/proto23.h - C++23 Protobuf serializer/deserializer with explicit field listing
  *
  * Backport of proto26 (C++26 reflection-based) to C++23.
  * Instead of [[=N]] reflection annotations, each serializable struct declares:
@@ -1386,6 +1386,16 @@ template<proto23::detail::numeric_enum Enum>
 constexpr auto operator+(Enum value) {
     return static_cast<std::underlying_type_t<Enum>>(value);
 }
+inline constexpr auto operator+(parse_error value) {
+    return static_cast<std::underlying_type_t<parse_error>>(value);
+}
+inline auto& operator<<(std::ostream& out, parse_error err) {
+    const auto flags{out.flags()};
+    out << std::hex << +err;
+    out.flags(flags);
+    return out;
+}
+
 } // namespace operators
 
 } // namespace proto23

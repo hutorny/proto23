@@ -22,6 +22,7 @@
  */
 
 #include "descriptor.h"
+#include <proto23/diagnostic.h>
 
 #ifdef _WIN32
 #  include <fcntl.h>
@@ -577,7 +578,6 @@ int main() {
 #endif
 
     // Read the entire CodeGeneratorRequest from stdin into a string
-    // TODO Investigate why diect read from std::cin is not working
     const std::string raw{
         std::istreambuf_iterator<char>(std::cin),
         std::istreambuf_iterator<char>{}};
@@ -587,7 +587,8 @@ int main() {
       pb::CodeGeneratorRequest request{};
       const auto result = proto23::deserialize(iss, request);
       if( result.errors() != proto23::parse_error::none) {
-        std::cerr << "Parsed with errors\n";
+        std::cerr << "Parsed with errors\n" 
+                  << proto23::diagnostic::explain(result.errors()) << '\n';
       }
 
       // Index proto_file by name for quick lookup
