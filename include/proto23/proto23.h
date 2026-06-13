@@ -77,6 +77,7 @@ enum class parse_error : std::uint8_t {
   array_overrun = 4,
   string_overrun = 8,
   invalid_length = 16,
+  tellg_fail = 32,
 };
 
 // =============================================================================
@@ -459,6 +460,9 @@ public:
         flags[i] = 1;
         errors_ |= err;
     }
+    void set(parse_error err) noexcept {
+        errors_ |= err;
+    }
     constexpr auto errors() const noexcept {
       return errors_;
     }
@@ -501,6 +505,7 @@ public:
   using base::any;
   using base::set;
   constexpr deserialize_result() = default;
+  constexpr explicit deserialize_result(parse_error err) { set(err); }
   template<auto Field>
   constexpr bool has() const noexcept {
     static constexpr std::size_t I = detail::find_field<Field, model<Message>>();
@@ -594,9 +599,13 @@ inline constexpr std::size_t max_valid_string_length = 64Z*1024Z*1024Z;
     return result;
 }
 
+[[nodiscard]] inline length_type get_pos(std::istream& in) {
+    return static_cast<length_type>(in.tellg());
+}
+
 [[nodiscard]] inline length_type get_eod(std::istream& in) {
     const auto len = read_length(in);
-    return len + static_cast<length_type>(in.tellg());
+    return len + get_pos(in);
 }
 
 [[nodiscard]] inline length_type unlimited([[maybe_unused]] std::istream&) noexcept {
@@ -806,7 +815,7 @@ template<bounded_array Array>
     const auto last    = std::end(v);
     field_result result{};
     while (in.good()
-           && static_cast<length_type>(in.tellg()) < eod
+           && get_pos(in) < eod
            && current != last)
     {
         std::remove_cvref_t<decltype(*current)> elem{};
@@ -817,9 +826,9 @@ template<bounded_array Array>
             result.read = quantity::some;
         } else { break; }
     }
-    if (static_cast<length_type>(in.tellg()) < eod) {
+    if (get_pos(in) < eod) {
         in.ignore(static_cast<std::streamsize>(
-            eod - static_cast<length_type>(in.tellg())));
+            eod - get_pos(in)));
         result.errors |= parse_error::array_overrun;
         return result;
     }
@@ -885,7 +894,7 @@ template<packed_t Pack, container C>
       std::size_t count = 0U;
       parse_error err {};
       auto inserter     = std::back_inserter(v);
-      while (in.good() && static_cast<length_type>(in.tellg()) < eod) {
+      while (in.good() && get_pos(in) < eod) {
           if (v.size() >= v.max_size()) {
             const auto [id, wt] = read_id_type(in);
             skip(in, wt);
@@ -999,8 +1008,7 @@ deserialize_message(std::istream& in, Message& msg,
     using Model = model<Message>;
     deserialize_result<Message> result{};
     const auto end_pos = eod_fn(in);
-    while (in.good()
-           && static_cast<length_type>(in.tellg()) < end_pos)
+    while (in.good() && get_pos(in) < end_pos)
     {
         const auto [id, wt] = read_id_type(in);
         if (!in.good()) { break; }
@@ -1024,6 +1032,7 @@ deserialize_message(std::istream& in, Message& msg,
 template<message Message>
 [[nodiscard]] deserialize_result<Message>
 deserialize(std::istream& in, Message& msg) {
+    if (in.tellg() == -1) return deserialize_result<Message>{parse_error::tellg_fail};
     return detail::deserialize_message(in, msg, &detail::unlimited);
 }
 
