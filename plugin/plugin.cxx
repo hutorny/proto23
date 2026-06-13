@@ -189,8 +189,11 @@ private:
     pb::FileOptions                options_ { default_options };
     std::unordered_map<std::string, traits> complete_ {};
 
-    traits is_complete(const std::string& fqn) const noexcept {
-      const auto found = complete_.find(fqn);
+    traits is_complete(const pb::FieldDescriptorProto& f, const std::string& package) const noexcept {
+      if (! reg_.contains(f.type_name)) {
+        return {true, false};
+      }
+      const auto found = complete_.find(element_type(f, package));
       if (found == complete_.end()) return {false, true};
       return found->second;
     }
@@ -279,7 +282,7 @@ private:
             }
         }
         auto element_type_name = element_type(f, file_.package);
-        const auto [complete, noinit] = (type == F::TYPE_MESSAGE) ? is_complete(element_type_name) : traits{true, false};
+        const auto [complete, noinit] = (type == F::TYPE_MESSAGE) ? is_complete(f, file_.package) : traits{true, false};
         if (type == F::TYPE_MESSAGE) {
            element_type_name += sanitizing_suffix(element_type_name);
         }
@@ -407,7 +410,7 @@ private:
                 for (std::size_t i = 0U; i < ofields.size(); ++i) {
                     if (i != 0U) { out << ", "; }
                     const auto item_type_name = element_type(*ofields[i], file_.package);
-                    const auto item_traits = is_complete(item_type_name);
+                    const auto item_traits = is_complete(*ofields[i], file_.package);
                     items_complete = items_complete && item_traits.complete;
                     items_noinit = items_noinit || item_traits.noinit;
                     if (ofields[i]->type == F::TYPE_MESSAGE && !item_traits.complete) {

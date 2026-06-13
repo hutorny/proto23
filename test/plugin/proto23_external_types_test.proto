@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "proto23/options.proto";
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "proto23_types_test.proto";
+
+message ExtrenlTypesTest {
+  IntegralTypesTest unique_ptr_IntegralTypesTest = 1;
+  IntegralTypesTest inplace_IntegralTypesTest = 2 [(proto23.inplace) = YES];
+  google.protobuf.Duration unique_ptr_Duration = 3;
+  google.protobuf.Duration inplace_Duration = 4 [(proto23.inplace) = YES];
+  google.protobuf.Timestamp unique_ptr_Timestamp = 5;
+  google.protobuf.Timestamp inplace_Timestamp = 6 [(proto23.inplace) = YES];
+}

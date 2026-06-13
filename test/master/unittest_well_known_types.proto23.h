@@ -31,25 +31,25 @@ struct OneofWellKnownTypes;
 struct MapWellKnownTypes;
 
 struct TestWellKnownTypes {
-    std::unique_ptr<google::protobuf::Any> any_field;
-    std::unique_ptr<google::protobuf::Api> api_field;
-    std::unique_ptr<google::protobuf::Duration> duration_field;
-    std::unique_ptr<google::protobuf::Empty> empty_field;
-    std::unique_ptr<google::protobuf::FieldMask> field_mask_field;
-    std::unique_ptr<google::protobuf::SourceContext> source_context_field;
-    std::unique_ptr<google::protobuf::Struct> struct_field;
-    std::unique_ptr<google::protobuf::Timestamp> timestamp_field;
-    std::unique_ptr<google::protobuf::Type> type_field;
-    std::unique_ptr<google::protobuf::DoubleValue> double_field;
-    std::unique_ptr<google::protobuf::FloatValue> float_field;
-    std::unique_ptr<google::protobuf::Int64Value> int64_field;
-    std::unique_ptr<google::protobuf::UInt64Value> uint64_field;
-    std::unique_ptr<google::protobuf::Int32Value> int32_field;
-    std::unique_ptr<google::protobuf::UInt32Value> uint32_field;
-    std::unique_ptr<google::protobuf::BoolValue> bool_field;
-    std::unique_ptr<google::protobuf::StringValue> string_field;
-    std::unique_ptr<google::protobuf::BytesValue> bytes_field;
-    std::unique_ptr<google::protobuf::Value> value_field;
+    std::unique_ptr<google::protobuf::Any> any_field{};
+    std::unique_ptr<google::protobuf::Api> api_field{};
+    std::unique_ptr<google::protobuf::Duration> duration_field{};
+    std::unique_ptr<google::protobuf::Empty> empty_field{};
+    std::unique_ptr<google::protobuf::FieldMask> field_mask_field{};
+    std::unique_ptr<google::protobuf::SourceContext> source_context_field{};
+    std::unique_ptr<google::protobuf::Struct> struct_field{};
+    std::unique_ptr<google::protobuf::Timestamp> timestamp_field{};
+    std::unique_ptr<google::protobuf::Type> type_field{};
+    std::unique_ptr<google::protobuf::DoubleValue> double_field{};
+    std::unique_ptr<google::protobuf::FloatValue> float_field{};
+    std::unique_ptr<google::protobuf::Int64Value> int64_field{};
+    std::unique_ptr<google::protobuf::UInt64Value> uint64_field{};
+    std::unique_ptr<google::protobuf::Int32Value> int32_field{};
+    std::unique_ptr<google::protobuf::UInt32Value> uint32_field{};
+    std::unique_ptr<google::protobuf::BoolValue> bool_field{};
+    std::unique_ptr<google::protobuf::StringValue> string_field{};
+    std::unique_ptr<google::protobuf::BytesValue> bytes_field{};
+    std::unique_ptr<google::protobuf::Value> value_field{};
 
     using Model = proto23::Fields<
         proto23::Field<&TestWellKnownTypes::any_field, 1>,
@@ -74,24 +74,24 @@ struct TestWellKnownTypes {
 };
 
 struct RepeatedWellKnownTypes {
-    std::vector<google::protobuf::Any> any_field;
-    std::vector<google::protobuf::Api> api_field;
-    std::vector<google::protobuf::Duration> duration_field;
-    std::vector<google::protobuf::Empty> empty_field;
-    std::vector<google::protobuf::FieldMask> field_mask_field;
-    std::vector<google::protobuf::SourceContext> source_context_field;
-    std::vector<google::protobuf::Struct> struct_field;
-    std::vector<google::protobuf::Timestamp> timestamp_field;
-    std::vector<google::protobuf::Type> type_field;
-    std::vector<google::protobuf::DoubleValue> double_field;
-    std::vector<google::protobuf::FloatValue> float_field;
-    std::vector<google::protobuf::Int64Value> int64_field;
-    std::vector<google::protobuf::UInt64Value> uint64_field;
-    std::vector<google::protobuf::Int32Value> int32_field;
-    std::vector<google::protobuf::UInt32Value> uint32_field;
-    std::vector<google::protobuf::BoolValue> bool_field;
-    std::vector<google::protobuf::StringValue> string_field;
-    std::vector<google::protobuf::BytesValue> bytes_field;
+    std::vector<google::protobuf::Any> any_field{};
+    std::vector<google::protobuf::Api> api_field{};
+    std::vector<google::protobuf::Duration> duration_field{};
+    std::vector<google::protobuf::Empty> empty_field{};
+    std::vector<google::protobuf::FieldMask> field_mask_field{};
+    std::vector<google::protobuf::SourceContext> source_context_field{};
+    std::vector<google::protobuf::Struct> struct_field{};
+    std::vector<google::protobuf::Timestamp> timestamp_field{};
+    std::vector<google::protobuf::Type> type_field{};
+    std::vector<google::protobuf::DoubleValue> double_field{};
+    std::vector<google::protobuf::FloatValue> float_field{};
+    std::vector<google::protobuf::Int64Value> int64_field{};
+    std::vector<google::protobuf::UInt64Value> uint64_field{};
+    std::vector<google::protobuf::Int32Value> int32_field{};
+    std::vector<google::protobuf::UInt32Value> uint32_field{};
+    std::vector<google::protobuf::BoolValue> bool_field{};
+    std::vector<google::protobuf::StringValue> string_field{};
+    std::vector<google::protobuf::BytesValue> bytes_field{};
 
     using Model = proto23::Fields<
         proto23::Field<&RepeatedWellKnownTypes::any_field, 1>,
@@ -115,7 +115,7 @@ struct RepeatedWellKnownTypes {
 };
 
 struct OneofWellKnownTypes {
-    std::variant<std::unique_ptr<google::protobuf::Any>, std::unique_ptr<google::protobuf::Api>, std::unique_ptr<google::protobuf::Duration>, std::unique_ptr<google::protobuf::Empty>, std::unique_ptr<google::protobuf::FieldMask>, std::unique_ptr<google::protobuf::SourceContext>, std::unique_ptr<google::protobuf::Struct>, std::unique_ptr<google::protobuf::Timestamp>, std::unique_ptr<google::protobuf::Type>, std::unique_ptr<google::protobuf::DoubleValue>, std::unique_ptr<google::protobuf::FloatValue>, std::unique_ptr<google::protobuf::Int64Value>, std::unique_ptr<google::protobuf::UInt64Value>, std::unique_ptr<google::protobuf::Int32Value>, std::unique_ptr<google::protobuf::UInt32Value>, std::unique_ptr<google::protobuf::BoolValue>, std::unique_ptr<google::protobuf::StringValue>, std::unique_ptr<google::protobuf::BytesValue>> oneof_field;
+    std::variant<google::protobuf::Any, google::protobuf::Api, google::protobuf::Duration, google::protobuf::Empty, google::protobuf::FieldMask, google::protobuf::SourceContext, google::protobuf::Struct, google::protobuf::Timestamp, google::protobuf::Type, google::protobuf::DoubleValue, google::protobuf::FloatValue, google::protobuf::Int64Value, google::protobuf::UInt64Value, google::protobuf::Int32Value, google::protobuf::UInt32Value, google::protobuf::BoolValue, google::protobuf::StringValue, google::protobuf::BytesValue> oneof_field{};
 
     using Model = proto23::Fields<
         proto23::OneOf<&OneofWellKnownTypes::oneof_field, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18>>;

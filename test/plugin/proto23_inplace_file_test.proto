@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "proto23/options.proto";
+import "google/protobuf/timestamp.proto";
+
+option (proto23.inplace_string) = YES;
+option (proto23.inplace_repeated) = YES;
+option (proto23.inplace_message) = YES;
+
+message Outer2 {
+  sint32 int32 = 1;
+}
+
+message InplaceByFileDefaultTest {
+  message Inner {
+    sint32 int32 = 1;
+  }
+  Outer2 inplace_Outer = 1;
+  google.protobuf.Timestamp inplace_Timestamp = 2;
+  Inner inplace_inner = 3;
+  NotComplete2 unique_ptr_NotComplete = 5;
+  optional Inner optional_Inner = 6;
+  optional NotComplete2 unique_ptr_NotComplete2 = 8;
+  optional Outer2 optional_Outer = 9;
+  string inplace_string = 10;
+  repeated sint32 inplace_vector = 11;
+}
+
+message ExplicitNotInplace {
+  message Inner {
+    sint32 int32 = 1;
+  }
+
+  Outer2 unique_ptr_Outer = 1 [(proto23.inplace)=NO];
+  google.protobuf.Timestamp unique_ptr_Timestamp = 2 [(proto23.inplace) = NO];
+  Inner unique_ptr_Inner = 3 [(proto23.inplace)=NO];
+  NotComplete2 unique_ptr_NotComplete2 = 5 [(proto23.inplace)=NO];
+  optional Inner unique_ptr_Inner2 = 6 [(proto23.inplace)=NO];
+  optional NotComplete2 unique_ptr_NotComplete = 8 [(proto23.inplace)=NO];
+  repeated Inner vector_Inner = 11 [(proto23.inplace)=NO, (proto23.capacity)=100];
+  string std_string_200 = 12 [(proto23.inplace)=NO, (proto23.capacity)=200]; 
+  repeated NotComplete2 std_vector_NotComplete = 13 [(proto23.inplace)=NO, (proto23.capacity)=100];
+}
+
+message NotComplete2 {
+  sint32 int32 = 1;
+}
+

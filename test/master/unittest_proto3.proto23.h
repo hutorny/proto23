@@ -67,15 +67,15 @@ struct TestAllTypes {
     std::vector<std::byte> optional_bytes{};
     std::optional<TestAllTypes::NestedMessage> optional_nested_message{};
     std::unique_ptr<ForeignMessage> optional_foreign_message;
-    std::unique_ptr<proto2_unittest_import::ImportMessage> optional_import_message;
+    std::unique_ptr<proto2_unittest_import::ImportMessage> optional_import_message{};
     TestAllTypes::NestedEnum optional_nested_enum{};
     ForeignEnum optional_foreign_enum{};
     std::string optional_string_piece{};
     std::string optional_cord{};
-    std::unique_ptr<proto2_unittest_import::PublicImportMessage> optional_public_import_message;
+    std::unique_ptr<proto2_unittest_import::PublicImportMessage> optional_public_import_message{};
     TestAllTypes::NestedMessage optional_lazy_message{};
     TestAllTypes::NestedMessage optional_unverified_lazy_message{};
-    std::unique_ptr<proto2_unittest_import::ImportMessage> optional_lazy_import_message;
+    std::unique_ptr<proto2_unittest_import::ImportMessage> optional_lazy_import_message{};
     std::vector<proto23::int32> repeated_int32{};
     std::vector<proto23::int64> repeated_int64{};
     std::vector<std::uint32_t> repeated_uint32{};
@@ -93,13 +93,13 @@ struct TestAllTypes {
     std::vector<std::vector<std::byte>> repeated_bytes{};
     std::vector<TestAllTypes::NestedMessage> repeated_nested_message{};
     std::vector<ForeignMessage> repeated_foreign_message;
-    std::vector<proto2_unittest_import::ImportMessage> repeated_import_message;
+    std::vector<proto2_unittest_import::ImportMessage> repeated_import_message{};
     std::vector<TestAllTypes::NestedEnum> repeated_nested_enum{};
     std::vector<ForeignEnum> repeated_foreign_enum{};
     std::vector<std::string> repeated_string_piece{};
     std::vector<std::string> repeated_cord{};
     std::vector<TestAllTypes::NestedMessage> repeated_lazy_message{};
-    std::variant<std::uint32_t, TestAllTypes::NestedMessage, std::string, std::vector<std::byte>> oneof_field;
+    std::variant<std::uint32_t, TestAllTypes::NestedMessage, std::string, std::vector<std::byte>> oneof_field{};
 
     using Model = proto23::Fields<
         proto23::Field<&TestAllTypes::optional_int32, 1>,
@@ -255,7 +255,7 @@ struct TestOneof2 {
         BAZ = 3,
     };
 
-    std::variant<TestOneof2::NestedEnum> foo;
+    std::variant<TestOneof2::NestedEnum> foo{};
 
     using Model = proto23::Fields<
         proto23::OneOf<&TestOneof2::foo, 6>>;
