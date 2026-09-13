@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package test_options;
+
+import "google/protobuf/descriptor.proto";
+
+enum MessageTypeID {
+  UNSPECIFIED = 0;
+  FOO = 1;
+  BAR = 2;
+};
+
+extend google.protobuf.MessageOptions {
+  // Message ID
+  MessageTypeID MESSAGE_ID = 68228;
+}

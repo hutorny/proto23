@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package test;
+
+import "proto23_options.proto";
+
+message MessageIDTest {
+  option (test_options.MESSAGE_ID) = FOO;
+  uint32 v = 1;
+}
