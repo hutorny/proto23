@@ -163,14 +163,19 @@ static bool is_map_entry(const pb::DescriptorProto* msg) noexcept {
         && msg->options->map_entry;
 }
 
+struct MessageIdDefinition {
+  std::string type;
+  std::string name;
+};
+
 // ============================================================================
 // Code generator
 // ============================================================================
 
 class Generator {
 public:
-    explicit Generator(const pb::FileDescriptorProto& f, const Registry& r)
-        : file_{f}, reg_{r} {}
+    explicit Generator(const pb::FileDescriptorProto& f, const Registry& r, const MessageIdDefinition& msgid)
+        : file_{f}, reg_{r}, message_id_{pkg_to_ns(msgid.type), msgid.name} {}
 
     std::string generate();
 
@@ -188,6 +193,7 @@ private:
     const Registry&                reg_;
     pb::FileOptions                options_ { default_options };
     std::unordered_map<std::string, traits> complete_ {};
+    MessageIdDefinition            message_id_{};
 
     traits is_complete(const pb::FieldDescriptorProto& f, const std::string& package) const noexcept {
       if (! reg_.contains(f.type_name)) {
@@ -470,11 +476,14 @@ private:
             out << ">;\n";
         }
         if (msg.options.value_or(pb::MessageOptions{}).message_id != 0) {
-          if (depth == 0) {
-            out << ind(depth + 1) << "static constexpr auto MESSAGE_ID = static_cast<"
-                << file_.package << "::MessageTypeID>(" << msg.options->message_id << ");\n";
+          if (depth == 0 && !message_id_.type.empty() && !message_id_.name.empty()) {
+            // Emit the enum's fully-qualified type name and static member name from the option definition itslef.
+            // This will make it valid in every namespace and correct for messages in any (sub-)package.
+            out << ind(depth + 1) << "static constexpr auto " << message_id_.name << " = static_cast<"
+                << message_id_.type << ">(" << msg.options->message_id << ");\n";
           } else {
-            out << ind(depth + 1) << "// MESSAGE_ID ignored for nested messages\n";
+            out << ind(depth + 1) << (depth == 0 ? "// MESSAGE_ID ignored for nested messages\n"
+                                                 : "// MESSAGE_ID is missing type or name");
             // TODO report warning
           }
         }
@@ -570,6 +579,20 @@ static std::string output_filename(const std::string& proto_name) {
 }
 
 // ============================================================================
+// Lookup MessageID type
+// ============================================================================
+
+static MessageIdDefinition lookup_message_id_type(const pb::FileDescriptorProto& file) {
+    for (const auto& extension : file.extension) {
+        if (extension.extendee == ".google.protobuf.MessageOptions" &&
+            extension.number == proto23::options::MESSAGE_ID_NUM) {
+            return { extension.type_name, extension.name };
+        }
+    }
+    return {};
+}
+
+// ============================================================================
 // main
 // ============================================================================
 
@@ -593,11 +616,14 @@ int main() {
         std::cerr << "Parsed with errors\n" 
                   << proto23::diagnostic::explain(result.errors()) << '\n';
       }
-
+      MessageIdDefinition message_id {};
       // Index proto_file by name for quick lookup
       std::map<std::string, const pb::FileDescriptorProto*> file_map{};
       for (const auto& f : request.proto_file) {
           file_map.emplace(f.name, &f);
+          if( message_id.type.empty()) {
+              message_id = lookup_message_id_type(f);
+          }
       }
 
       pb::CodeGeneratorResponse response{};
@@ -612,7 +638,7 @@ int main() {
           const auto& fdp = *it->second;
 
           const Registry     reg = build_registry(fdp);
-          Generator          gen{fdp, reg};
+          Generator          gen{fdp, reg, message_id};
 
           pb::CodeGeneratorResponseFile outf{};
           outf.name    = output_filename(fname);
