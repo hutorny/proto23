@@ -24,7 +24,7 @@ enum class Inplace {
     YES = 1,
     NO = 2,
 };
-
+static constexpr int MESSAGE_ID_NUM = 68228;
 } // namespace proto23::options
 
 namespace pb {
@@ -145,7 +145,7 @@ struct MessageOptions {
     using Model = proto23::Fields<
         proto23::Field<&MessageOptions::deprecated, 3>,
         proto23::Field<&MessageOptions::map_entry, 7>,
-        proto23::Field<&MessageOptions::message_id, 68228>>;
+        proto23::Field<&MessageOptions::message_id, proto23::options::MESSAGE_ID_NUM>>;
 };
 
 // ---------------------------------------------------------------------------
@@ -204,6 +204,7 @@ struct FileDescriptorProto {
     std::vector<std::string>         dependency{};
     std::vector<DescriptorProto>     message_type{};
     std::vector<EnumDescriptorProto> enum_type{};
+    std::vector<FieldDescriptorProto> extension{};
     std::optional<FileOptions>       options{};
     std::string                      syntax{};
 
@@ -213,6 +214,7 @@ struct FileDescriptorProto {
         proto23::Field<&FileDescriptorProto::dependency,   3>,
         proto23::Field<&FileDescriptorProto::message_type, 4>,
         proto23::Field<&FileDescriptorProto::enum_type,    5>,
+        proto23::Field<&FileDescriptorProto::extension,    7>,
         proto23::Field<&FileDescriptorProto::options,      8>,
         proto23::Field<&FileDescriptorProto::syntax,      12>>;
 };
