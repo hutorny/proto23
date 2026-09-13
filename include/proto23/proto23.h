@@ -854,7 +854,15 @@ template<associative Container>
 template<proto23::message Message>
 [[nodiscard]] field_result deserialize(std::istream& in, Message& msg) {
     const auto r = deserialize_message(in, msg, &get_eod);
-    return field_result { any(r) ? quantity::some : quantity::none, r.errors() };
+    // The field's tag was matched and its length-delimited body was fully
+    // consumed by deserialize_message above, so the field WAS present on the
+    // wire even when it carried no set sub-fields (an all-default / empty
+    // sub-message, e.g. produced by any standard-protobuf encoder). Reporting
+    // quantity::none here makes the caller (try_field_at) treat the field as
+    // unmatched, after which deserialize_message skip()s the *next* wire field
+    // and desyncs the remainder of the message. Always report `some`; presence
+    // reflects that the field appeared, and its (empty) content is already in.
+    return field_result { quantity::some, r.errors() };
 }
 
 // --- Empty message: reads the length prefix then ignore the message body
