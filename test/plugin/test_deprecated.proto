@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package test;
+
+enum TestDeprecatedEnum {
+  option deprecated = true;
+  UNKNOWN = 0;
+}
+
+enum TestDeprecatedEnumValue {
+  UNSPECIFIED = 0;
+  DEPRECATED_VALUE = 1 [deprecated = true];
+}
+
+message TestDeprecatedMessage {
+  option deprecated = true;
+  bool foo = 1;
+}
+
+message TestDeprecatedField {
+  bool foo = 1 [deprecated = true];
+}
