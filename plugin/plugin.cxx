@@ -175,7 +175,8 @@ struct MessageIdDefinition {
 class Generator {
 public:
     explicit Generator(const pb::FileDescriptorProto& f, const Registry& r, const MessageIdDefinition& msgid)
-        : file_{f}, reg_{r}, message_id_{pkg_to_ns(msgid.type), msgid.name} {}
+        : file_{f}, reg_{r}, message_id_{pkg_to_ns(msgid.type), msgid.name}, emit_deprecated_{!is_protobuf_core(f)}
+        {}
 
     std::string generate();
 
@@ -194,6 +195,7 @@ private:
     pb::FileOptions                options_ { default_options };
     std::unordered_map<std::string, traits> complete_ {};
     MessageIdDefinition            message_id_{};
+    bool                           emit_deprecated_ { true };
 
     traits is_complete(const pb::FieldDescriptorProto& f, const std::string& package) const noexcept {
       if (! reg_.contains(f.type_name)) {
@@ -341,19 +343,21 @@ private:
     // ---- Emitters ----
 
     void emit_enum(std::ostream& out, const pb::EnumDescriptorProto& e, int depth) const {
-        out << ind(depth) << "enum class " << e.name << sanitizing_suffix(e.name) << " : std::int32_t {\n";
+        out << ind(depth) << deprecated(e.options) << "enum class " << e.name << sanitizing_suffix(e.name) << " : std::int32_t {\n";
         for (const auto& v : e.value) {
-            out << ind(depth + 1)
+            out << ind(depth + 1) << deprecated(v.options)
                 << v.name << sanitizing_suffix(v.name) << " = "
                 << static_cast<std::int32_t>(v.number) << ",\n";
         }
         out << ind(depth) << "};\n\n";
     }
     /// Emit [[deprecated]] attribute
-    static constexpr std::string_view deprecated(const auto& options) {
-        return (options && options->deprecated) ? "[[deprecated]]" : "";
+    std::string_view deprecated(const auto& options) const {
+        return (emit_deprecated_ && options && options->deprecated) ? "[[deprecated]] " : "";
     }
-
+    static bool is_protobuf_core(const pb::FileDescriptorProto& f) {
+      return f.package == "google.protobuf";
+    }
     /// Emit a struct for one DescriptorProto.
     ///
     /// @param qual_prefix  fully-qualified C++ prefix for the destructor
@@ -429,7 +433,7 @@ private:
                     << (items_complete && !items_noinit ? "{}" : "") << ";\n";
             } else {
                 auto [field_type, field_noinit] = field_cpp_type(f, msg);
-                out << ind(depth + 1) << field_type << " " << f.name << sanitizing_suffix(f.name)
+                out << ind(depth + 1) << deprecated(f.options) << field_type << " " << f.name << sanitizing_suffix(f.name)
                     << (field_noinit ? ";\n" : "{};\n");
                 if (field_noinit) noinit = true;
             }

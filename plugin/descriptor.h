@@ -29,16 +29,35 @@ static constexpr int MESSAGE_ID_NUM = 68228;
 
 namespace pb {
 
+struct EnumOptions {
+    bool allow_alias{};
+    bool deprecated{};
+
+    using Model = proto23::Fields<
+        proto23::Field<&EnumOptions::allow_alias, 2>,
+        proto23::Field<&EnumOptions::deprecated, 3>>;
+};
+
+struct EnumValueOptions {
+    bool deprecated{};
+
+    using Model = proto23::Fields<
+        proto23::Field<&EnumValueOptions::deprecated, 1>>;
+};
+
+
 // ---------------------------------------------------------------------------
 // google.protobuf.EnumValueDescriptorProto  (descriptor.proto)
 // ---------------------------------------------------------------------------
 struct EnumValueDescriptorProto {
     std::string  name{};
     proto23::int32 number{};
+    std::optional<EnumValueOptions> options{};
 
     using Model = proto23::Fields<
-        proto23::Field<&EnumValueDescriptorProto::name,   1>,
-        proto23::Field<&EnumValueDescriptorProto::number, 2>>;
+        proto23::Field<&EnumValueDescriptorProto::name, 1>,
+        proto23::Field<&EnumValueDescriptorProto::number, 2>,
+        proto23::Field<&EnumValueDescriptorProto::options, 3>>;
 };
 
 // ---------------------------------------------------------------------------
@@ -47,10 +66,12 @@ struct EnumValueDescriptorProto {
 struct EnumDescriptorProto {
     std::string                           name{};
     std::vector<EnumValueDescriptorProto> value{};
+    std::optional<EnumOptions>            options{};
 
     using Model = proto23::Fields<
-        proto23::Field<&EnumDescriptorProto::name,  1>,
-        proto23::Field<&EnumDescriptorProto::value, 2>>;
+        proto23::Field<&EnumDescriptorProto::name, 1>,
+        proto23::Field<&EnumDescriptorProto::value, 2>,
+        proto23::Field<&EnumDescriptorProto::options, 3>>;
 };
 
 // ---------------------------------------------------------------------------
