@@ -27,6 +27,11 @@ ending() {
 }
 
 
+single() {
+  echo -n "const Item<$1> $1_test"  
+}
+
+
 vectors() {
   echo -n '  {{{'
   list '' $2 ${@:3} 
@@ -45,6 +50,12 @@ strings() {
   echo -n '  {{"'${3:-$2}'"}, "'
   echo 'v:"'$2'"' | protoc -I ../proto --encode=tests.strings.$1 strings.proto | hexdump -v -e '"\\" "x" 1/1 "%02X"'  
   echo '"sv },'
+}
+
+bug() {
+  echo -n "  {$3," '"'
+  echo "$2" | protoc -I ../proto --encode=tests.bugs.$1 bugs.proto | hexdump -v -e '"\\" "x" 1/1 "%02X"'
+  echo '"sv };'
 }
 
 begin Map
@@ -307,3 +318,6 @@ for v in  -2.99792e+08 -0.01 -1.001e-24 0 1.001e-24 0.01 1 1.1 99.99 7.01e+14; d
  numeric $v "" Float_
 done
 ending
+
+single EmptyButPresentBug
+bug EmptyButPresentBug 'empty:{};v:1' '{{}, 1}'
