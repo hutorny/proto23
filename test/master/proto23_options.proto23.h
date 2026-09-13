@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -25,3 +26,11 @@ enum class MessageTypeID : std::int32_t {
 };
 
 } // namespace test_options
+
+namespace proto23 {
+
+template<>
+struct enum_traits<test_options::MessageTypeID> : 
+    proto23::detail::make_enum_traits<test_options::MessageTypeID,0,2,3,3U,true>{};
+
+}

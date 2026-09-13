@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -92,3 +93,11 @@ struct TestUnpackedTypes {
 };
 
 } // namespace google::protobuf::python::internal
+
+namespace proto23 {
+
+template<>
+struct enum_traits<google::protobuf::python::internal::TestPackedTypes::NestedEnum> : 
+    proto23::detail::make_enum_traits<google::protobuf::python::internal::TestPackedTypes::NestedEnum,0,2,3,3U,true>{};
+
+}

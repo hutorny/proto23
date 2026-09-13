@@ -1,6 +1,7 @@
 #pragma once
 #include <boost/ut.hpp>
 #include <proto23/proto23.h>
+#include <proto23/enum_traits.h>
 #include <meta/nameof.h>
 #include "data.h"
 

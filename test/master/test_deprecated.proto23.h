@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -43,3 +44,14 @@ struct TestDeprecatedField {
 };
 
 } // namespace test
+
+namespace proto23 {
+
+template<>
+struct enum_traits<test::TestDeprecatedEnum> : 
+    proto23::detail::make_enum_traits<test::TestDeprecatedEnum,0,0,1,0U,true>{};
+template<>
+struct enum_traits<test::TestDeprecatedEnumValue> : 
+    proto23::detail::make_enum_traits<test::TestDeprecatedEnumValue,0,1,2,1U,true>{};
+
+}

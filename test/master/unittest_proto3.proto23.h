@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -406,3 +407,17 @@ struct TestHasbits {
         proto23::Field<&TestHasbits::child, 100>>;
 };
 
+
+namespace proto23 {
+
+template<>
+struct enum_traits<::ForeignEnum> : 
+    proto23::detail::make_enum_traits<::ForeignEnum,0,123456,5,123463U,false>{};
+template<>
+struct enum_traits<::TestAllTypes::NestedEnum> : 
+    proto23::detail::make_enum_traits<::TestAllTypes::NestedEnum,-1,3,5,4294967295U,false>{};
+template<>
+struct enum_traits<::TestOneof2::NestedEnum> : 
+    proto23::detail::make_enum_traits<::TestOneof2::NestedEnum,0,3,4,3U,true>{};
+
+}

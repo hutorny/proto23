@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -374,3 +375,20 @@ struct EnumOnlyProto3 {
 };
 
 } // namespace protobuf_test_messages::proto3
+
+namespace proto23 {
+
+template<>
+struct enum_traits<protobuf_test_messages::proto3::ForeignEnum> : 
+    proto23::detail::make_enum_traits<protobuf_test_messages::proto3::ForeignEnum,0,2,3,3U,true>{};
+template<>
+struct enum_traits<protobuf_test_messages::proto3::TestAllTypesProto3::NestedEnum> : 
+    proto23::detail::make_enum_traits<protobuf_test_messages::proto3::TestAllTypesProto3::NestedEnum,-1,2,4,4294967295U,false>{};
+template<>
+struct enum_traits<protobuf_test_messages::proto3::TestAllTypesProto3::AliasedEnum> : 
+    proto23::detail::make_enum_traits<protobuf_test_messages::proto3::TestAllTypesProto3::AliasedEnum,0,2,6,3U,false>{};
+template<>
+struct enum_traits<protobuf_test_messages::proto3::EnumOnlyProto3::Bool> : 
+    proto23::detail::make_enum_traits<protobuf_test_messages::proto3::EnumOnlyProto3::Bool,0,1,2,1U,true>{};
+
+}

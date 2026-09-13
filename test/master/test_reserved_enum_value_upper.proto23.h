@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -100,3 +101,11 @@ enum class NotAllowed : std::int32_t {
 };
 
 } // namespace upper_enum_value
+
+namespace proto23 {
+
+template<>
+struct enum_traits<upper_enum_value::NotAllowed> : 
+    proto23::detail::make_enum_traits<upper_enum_value::NotAllowed,0,79,80,127U,false>{};
+
+}
