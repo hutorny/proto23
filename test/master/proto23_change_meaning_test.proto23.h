@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -41,3 +42,11 @@ struct ChangeMeaningToField {
         proto23::Field<&ChangeMeaningToField::Enum, 4>>;
 };
 
+
+namespace proto23 {
+
+template<>
+struct enum_traits<::Enum> : 
+    proto23::detail::make_enum_traits<::Enum,0,0,1,0U,true>{};
+
+}

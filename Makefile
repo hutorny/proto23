@@ -104,7 +104,7 @@ $(EX_BIN).run: $(EX_BIN)
 	@$<
 
 clean:
-	rm -rf $(BUILDDIR)
+	rm -rf $(BUILDDIR) build/out/* 
 
 clean-all:
 	rm -rf build

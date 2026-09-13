@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -337,3 +338,248 @@ enum class ITERABLE : std::int32_t {
 };
 
 } // namespace upper_enum
+
+namespace proto23 {
+
+template<>
+struct enum_traits<upper_enum::ABSTRACT> : 
+    proto23::detail::make_enum_traits<upper_enum::ABSTRACT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::AND> : 
+    proto23::detail::make_enum_traits<upper_enum::AND,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ARRAY> : 
+    proto23::detail::make_enum_traits<upper_enum::ARRAY,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::AS> : 
+    proto23::detail::make_enum_traits<upper_enum::AS,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::BREAK> : 
+    proto23::detail::make_enum_traits<upper_enum::BREAK,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::CALLABLE> : 
+    proto23::detail::make_enum_traits<upper_enum::CALLABLE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::CASE> : 
+    proto23::detail::make_enum_traits<upper_enum::CASE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::CATCH> : 
+    proto23::detail::make_enum_traits<upper_enum::CATCH,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::CLASS> : 
+    proto23::detail::make_enum_traits<upper_enum::CLASS,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::CLONE> : 
+    proto23::detail::make_enum_traits<upper_enum::CLONE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::CONST> : 
+    proto23::detail::make_enum_traits<upper_enum::CONST,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::CONTINUE> : 
+    proto23::detail::make_enum_traits<upper_enum::CONTINUE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::DECLARE> : 
+    proto23::detail::make_enum_traits<upper_enum::DECLARE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::DEFAULT> : 
+    proto23::detail::make_enum_traits<upper_enum::DEFAULT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::DIE> : 
+    proto23::detail::make_enum_traits<upper_enum::DIE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::DO> : 
+    proto23::detail::make_enum_traits<upper_enum::DO,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ECHO> : 
+    proto23::detail::make_enum_traits<upper_enum::ECHO,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ELSE> : 
+    proto23::detail::make_enum_traits<upper_enum::ELSE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ELSEIF> : 
+    proto23::detail::make_enum_traits<upper_enum::ELSEIF,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::EMPTY> : 
+    proto23::detail::make_enum_traits<upper_enum::EMPTY,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ENDDECLARE> : 
+    proto23::detail::make_enum_traits<upper_enum::ENDDECLARE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ENDFOR> : 
+    proto23::detail::make_enum_traits<upper_enum::ENDFOR,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ENDFOREACH> : 
+    proto23::detail::make_enum_traits<upper_enum::ENDFOREACH,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ENDIF> : 
+    proto23::detail::make_enum_traits<upper_enum::ENDIF,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ENDSWITCH> : 
+    proto23::detail::make_enum_traits<upper_enum::ENDSWITCH,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ENDWHILE> : 
+    proto23::detail::make_enum_traits<upper_enum::ENDWHILE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::EVAL> : 
+    proto23::detail::make_enum_traits<upper_enum::EVAL,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::EXIT> : 
+    proto23::detail::make_enum_traits<upper_enum::EXIT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::EXTENDS> : 
+    proto23::detail::make_enum_traits<upper_enum::EXTENDS,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FINAL> : 
+    proto23::detail::make_enum_traits<upper_enum::FINAL,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FINALLY> : 
+    proto23::detail::make_enum_traits<upper_enum::FINALLY,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FN> : 
+    proto23::detail::make_enum_traits<upper_enum::FN,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FOR> : 
+    proto23::detail::make_enum_traits<upper_enum::FOR,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FOREACH> : 
+    proto23::detail::make_enum_traits<upper_enum::FOREACH,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FUNCTION> : 
+    proto23::detail::make_enum_traits<upper_enum::FUNCTION,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::GLOBAL> : 
+    proto23::detail::make_enum_traits<upper_enum::GLOBAL,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::GOTO> : 
+    proto23::detail::make_enum_traits<upper_enum::GOTO,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::IF> : 
+    proto23::detail::make_enum_traits<upper_enum::IF,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::IMPLEMENTS> : 
+    proto23::detail::make_enum_traits<upper_enum::IMPLEMENTS,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::INCLUDE> : 
+    proto23::detail::make_enum_traits<upper_enum::INCLUDE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::INCLUDE_ONCE> : 
+    proto23::detail::make_enum_traits<upper_enum::INCLUDE_ONCE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::INSTANCEOF> : 
+    proto23::detail::make_enum_traits<upper_enum::INSTANCEOF,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::INSTEADOF> : 
+    proto23::detail::make_enum_traits<upper_enum::INSTEADOF,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::INTERFACE> : 
+    proto23::detail::make_enum_traits<upper_enum::INTERFACE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ISSET> : 
+    proto23::detail::make_enum_traits<upper_enum::ISSET,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::LIST> : 
+    proto23::detail::make_enum_traits<upper_enum::LIST,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::MATCH> : 
+    proto23::detail::make_enum_traits<upper_enum::MATCH,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::NAMESPACE> : 
+    proto23::detail::make_enum_traits<upper_enum::NAMESPACE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::NEW> : 
+    proto23::detail::make_enum_traits<upper_enum::NEW,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::OR> : 
+    proto23::detail::make_enum_traits<upper_enum::OR,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::PARENT> : 
+    proto23::detail::make_enum_traits<upper_enum::PARENT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::PRINT> : 
+    proto23::detail::make_enum_traits<upper_enum::PRINT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::PRIVATE> : 
+    proto23::detail::make_enum_traits<upper_enum::PRIVATE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::PROTECTED> : 
+    proto23::detail::make_enum_traits<upper_enum::PROTECTED,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::PUBLIC> : 
+    proto23::detail::make_enum_traits<upper_enum::PUBLIC,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::READONLY> : 
+    proto23::detail::make_enum_traits<upper_enum::READONLY,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::REQUIRE> : 
+    proto23::detail::make_enum_traits<upper_enum::REQUIRE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::REQUIRE_ONCE> : 
+    proto23::detail::make_enum_traits<upper_enum::REQUIRE_ONCE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::RETURN> : 
+    proto23::detail::make_enum_traits<upper_enum::RETURN,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::SELF> : 
+    proto23::detail::make_enum_traits<upper_enum::SELF,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::STATIC> : 
+    proto23::detail::make_enum_traits<upper_enum::STATIC,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::SWITCH> : 
+    proto23::detail::make_enum_traits<upper_enum::SWITCH,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::THROW> : 
+    proto23::detail::make_enum_traits<upper_enum::THROW,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::TRAIT> : 
+    proto23::detail::make_enum_traits<upper_enum::TRAIT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::TRY> : 
+    proto23::detail::make_enum_traits<upper_enum::TRY,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::UNSET> : 
+    proto23::detail::make_enum_traits<upper_enum::UNSET,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::USE> : 
+    proto23::detail::make_enum_traits<upper_enum::USE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::VAR> : 
+    proto23::detail::make_enum_traits<upper_enum::VAR,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::WHILE> : 
+    proto23::detail::make_enum_traits<upper_enum::WHILE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::XOR> : 
+    proto23::detail::make_enum_traits<upper_enum::XOR,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::YIELD> : 
+    proto23::detail::make_enum_traits<upper_enum::YIELD,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::INT> : 
+    proto23::detail::make_enum_traits<upper_enum::INT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FLOAT> : 
+    proto23::detail::make_enum_traits<upper_enum::FLOAT,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::BOOL> : 
+    proto23::detail::make_enum_traits<upper_enum::BOOL,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::STRING> : 
+    proto23::detail::make_enum_traits<upper_enum::STRING,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::TRUE> : 
+    proto23::detail::make_enum_traits<upper_enum::TRUE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::FALSE> : 
+    proto23::detail::make_enum_traits<upper_enum::FALSE,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::NULL_> : 
+    proto23::detail::make_enum_traits<upper_enum::NULL_,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::VOID> : 
+    proto23::detail::make_enum_traits<upper_enum::VOID,0,0,1,0U,true>{};
+template<>
+struct enum_traits<upper_enum::ITERABLE> : 
+    proto23::detail::make_enum_traits<upper_enum::ITERABLE,0,0,1,0U,true>{};
+
+}

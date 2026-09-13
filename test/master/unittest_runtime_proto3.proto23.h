@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <proto23/enum_traits.h>
 #include <proto23/proto23.h>
 
 #include <cstddef>
@@ -183,3 +184,14 @@ struct Message3Optional {
         proto23::Field<&Message3Optional::optional_enum, 19>>;
 };
 
+
+namespace proto23 {
+
+template<>
+struct enum_traits<::Message3::Enum> : 
+    proto23::detail::make_enum_traits<::Message3::Enum,0,30,4,31U,false>{};
+template<>
+struct enum_traits<::Message3Optional::Enum> : 
+    proto23::detail::make_enum_traits<::Message3Optional::Enum,0,30,4,31U,false>{};
+
+}
