@@ -203,4 +203,7 @@ suite<"deserialize_result"> deserialize_result_tests = [] {
         expect(std::holds_alternative<int>(cute.oneof));
     };
 };
+suite<"bugs"> bugs_tests = [] {
+    add_single_test(EmptyButPresentBug_test, direction::deserialize);
+};
 } // namespace testing

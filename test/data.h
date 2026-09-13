@@ -405,6 +405,17 @@ struct ExtModel {
     Status        status{};
 };
 
+struct EmptyButPresentBug {
+  struct EmptyEmpty {
+    uint32_t v;
+    using Model = Fields<Field<&EmptyEmpty::v, 1>>;
+  };
+  EmptyEmpty empty;
+  uint32_t v = 2;
+  using Model = Fields<Field<&EmptyButPresentBug::empty, 1>, Field<&EmptyButPresentBug::v, 2>>;
+};
+
+
 } // namespace testing
 
 namespace proto23 {

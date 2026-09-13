@@ -4,6 +4,8 @@
 #include <meta/nameof.h>
 #include "data.h"
 
+#include <concepts>
+#include <ranges>
 #include <string_view>
 #include <string>
 #include <spanstream>
@@ -238,41 +240,46 @@ inline constexpr bool operator!(direction a) {
   return a == direction::none;
 }
 
-inline void add_test(const auto& tests, direction test_direction = direction::all) {
-  using cute_type = std::remove_extent_t<std::remove_cvref_t<decltype(tests)>>::first_type;
+inline void add_single_test(const auto& item, direction test_direction = direction::all) {
+  using cute_type = std::remove_cvref_t<decltype(item)>::first_type;
+  if (!!(test_direction & direction::deserialize)) {
+    test("des/" + test_name(item.first)) = [&item] {
+      std::ispanstream in { item.second };
+      cute_type actual {};
+      const auto res = deserialize(in, actual);
+      expect(res.errors() == parse_error::none);
+      expect(neq(any(res), item.second.empty()), item.loc);
+      expect(eq(actual, item.first), item.loc);
+    };
+  }
+  if (!!(test_direction & direction::serialize)) {
+    test("ser/" + test_name(item.first)) = [&item] {
+      std::string actual(item.second.size(), '\000');
+      std::ospanstream out { actual };
+      serialize(out, item.first);
+      expect(std::memcmp(actual.data(), item.second.data(), item.second.size()) == 0, item.loc)
+              << "wire bytes mismatch: got\n" << dump(actual) << "\nexpected\n" << dump(item.second) << '\n';
+    };
+  }
+  if (!!(test_direction & direction::roundtrip)) {
+    test("rdt/" + test_name(item.first)) = [&item] {
+      std::string buffer(item.second.size() * 2, '\000');
+      std::ospanstream out { buffer };
+      serialize(out, item.first);
+      std::ispanstream in { buffer };
+      cute_type actual {};
+      const auto res = deserialize(in, actual);
+      expect(res.errors() == parse_error::none);
+      expect(neq(any(res), item.second.empty()), item.loc);
+      expect(eq(actual, item.first), item.loc);
+    };
+  }
+}
+
+
+inline void add_test(const std::ranges::range auto& tests, direction test_direction = direction::all) {
   for(auto& item : tests) {
-    if (!!(test_direction & direction::deserialize)) {
-      test("des/" + test_name(item.first)) = [&item] {
-        std::ispanstream in { item.second };
-        cute_type actual {};
-        const auto res = deserialize(in, actual);
-        expect(res.errors() == parse_error::none);
-        expect(neq(any(res), item.second.empty()), item.loc);
-        expect(eq(actual, item.first), item.loc);
-      };
-    }
-    if (!!(test_direction & direction::serialize)) {
-      test("ser/" + test_name(item.first)) = [&item] {
-        std::string actual(item.second.size(), '\000');
-        std::ospanstream out { actual };
-        serialize(out, item.first);
-        expect(std::memcmp(actual.data(), item.second.data(), item.second.size()) == 0, item.loc)
-                << "wire bytes mismatch: got\n" << dump(actual) << "\nexpected\n" << dump(item.second) << '\n';
-      };
-    }
-    if (!!(test_direction & direction::roundtrip)) {
-      test("rdt/" + test_name(item.first)) = [&item] {
-        std::string buffer(item.second.size() * 2, '\000');
-        std::ospanstream out { buffer };
-        serialize(out, item.first);
-        std::ispanstream in { buffer };
-        cute_type actual {};
-        const auto res = deserialize(in, actual);
-        expect(res.errors() == parse_error::none);
-        expect(neq(any(res), item.second.empty()), item.loc);
-        expect(eq(actual, item.first), item.loc);
-      };
-    }
+    add_single_test(item, test_direction);
   }
 }
 

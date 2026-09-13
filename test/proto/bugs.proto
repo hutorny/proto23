@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package tests.bugs;
+
+message EmptyButPresentBug {
+  message EmptyEmpty {
+    uint32 v = 1;
+  }
+  EmptyEmpty empty = 1;
+  uint32 v = 2;
+}

@@ -452,3 +452,4 @@ const Item<Float_> Float__tests[] {
   {{99.99}, "\x0D\xE1\xFA\xC7\x42"sv },
   {{7.01e+14}, "\x0D\x92\x63\x1F\x58"sv },
 };
+const Item<EmptyButPresentBug> EmptyButPresentBug_test  {{{}, 1}, "\x0A\x00\x10\x01"sv };
