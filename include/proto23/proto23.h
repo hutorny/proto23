@@ -1353,9 +1353,15 @@ void serialize_field_at(std::ostream& out, const Msg& msg) {
             const auto& field_ref = msg.*FD::member;
             constexpr int num = FD::num;
 
-            if constexpr (container<AType>) {
-                // Vectors, lists — pack-aware
+            if constexpr (container<AType> && !contiguous_resizable_array<AType>) {
+                // Non-contiguous / non-binary containers are pack-aware.
                 serialize_container<FD::packing>(out, num, field_ref);
+            } else if constexpr (contiguous_resizable_array<AType>) {
+                // protobuf bytes (inplace_vector<std::byte, N>) and other
+                // fixed-scalar contiguous vectors are raw length-delimited
+                // data. This is also the representation accepted by the
+                // matching deserialize() overload.
+                serialize_value(out, num, field_ref, skippable::yes);
             } else if constexpr (bounded_array<AType> && !fixed_array<AType>) {
                 // Fixed-size arrays of varint elements (uint64_t[12] etc.)
                 serialize_bounded_array(out, num, field_ref);
