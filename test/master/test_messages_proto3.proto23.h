@@ -250,22 +250,22 @@ struct TestAllTypesProto3 {
         proto23::Field<&TestAllTypesProto3::repeated_foreign_message, 49>,
         proto23::Field<&TestAllTypesProto3::repeated_nested_enum, 51>,
         proto23::Field<&TestAllTypesProto3::repeated_foreign_enum, 52>,
-        proto23::Field<&TestAllTypesProto3::repeated_string_piece, 54, proto23::packed_t::no>,
-        proto23::Field<&TestAllTypesProto3::repeated_cord, 55, proto23::packed_t::no>,
-        proto23::Field<&TestAllTypesProto3::packed_int32, 75>,
-        proto23::Field<&TestAllTypesProto3::packed_int64, 76>,
-        proto23::Field<&TestAllTypesProto3::packed_uint32, 77>,
-        proto23::Field<&TestAllTypesProto3::packed_uint64, 78>,
-        proto23::Field<&TestAllTypesProto3::packed_sint32, 79>,
-        proto23::Field<&TestAllTypesProto3::packed_sint64, 80>,
-        proto23::Field<&TestAllTypesProto3::packed_fixed32, 81>,
-        proto23::Field<&TestAllTypesProto3::packed_fixed64, 82>,
-        proto23::Field<&TestAllTypesProto3::packed_sfixed32, 83>,
-        proto23::Field<&TestAllTypesProto3::packed_sfixed64, 84>,
-        proto23::Field<&TestAllTypesProto3::packed_float, 85>,
-        proto23::Field<&TestAllTypesProto3::packed_double, 86>,
-        proto23::Field<&TestAllTypesProto3::packed_bool, 87>,
-        proto23::Field<&TestAllTypesProto3::packed_nested_enum, 88>,
+        proto23::Field<&TestAllTypesProto3::repeated_string_piece, 54>,
+        proto23::Field<&TestAllTypesProto3::repeated_cord, 55>,
+        proto23::Field<&TestAllTypesProto3::packed_int32, 75, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_int64, 76, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_uint32, 77, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_uint64, 78, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_sint32, 79, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_sint64, 80, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_fixed32, 81, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_fixed64, 82, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_sfixed32, 83, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_sfixed64, 84, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_float, 85, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_double, 86, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_bool, 87, proto23::packed_t::yes>,
+        proto23::Field<&TestAllTypesProto3::packed_nested_enum, 88, proto23::packed_t::yes>,
         proto23::Field<&TestAllTypesProto3::unpacked_int32, 89, proto23::packed_t::no>,
         proto23::Field<&TestAllTypesProto3::unpacked_int64, 90, proto23::packed_t::no>,
         proto23::Field<&TestAllTypesProto3::unpacked_uint32, 91, proto23::packed_t::no>,
@@ -362,7 +362,7 @@ struct ForeignMessage {
 };
 
 struct NullHypothesisProto3 {
-    // This message has no fields
+    using Model = proto23::Fields<>; // This message has no fields
 };
 
 struct EnumOnlyProto3 {
@@ -371,7 +371,7 @@ struct EnumOnlyProto3 {
         kTrue = 1,
     };
 
-    // This message has no fields
+    using Model = proto23::Fields<>; // This message has no fields
 };
 
 } // namespace protobuf_test_messages::proto3

@@ -1,4 +1,5 @@
 #include "inplace_traits.h"
+#include "harness.h"
 #include "proto23_types_test.proto23.h"
 #include "proto23_external_types_test.proto23.h"
 
@@ -23,3 +24,9 @@ static_assert(is_unique_ptr<decltype(ExtrenlTypesTest::unique_ptr_Duration)>::va
 static_assert(!is_unique_ptr<decltype(ExtrenlTypesTest::inplace_Duration)>::value);
 static_assert(is_unique_ptr<decltype(ExtrenlTypesTest::unique_ptr_Timestamp)>::value);
 static_assert(!is_unique_ptr<decltype(ExtrenlTypesTest::inplace_Timestamp)>::value);
+
+namespace {
+[[maybe_unused]] void compile_roundtrip(std::istream& in, std::ostream& out) {
+    testing::harness::all<ExtrenlTypesTest, FloatTypesTest, StringTypesTest, ExtrenlTypesTest>(in, out);
+}
+} // namespace
