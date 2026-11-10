@@ -96,7 +96,7 @@ concept numeric_enum = anyof<std::is_same, T,
 
 /// User-defined enum (not one of the proto wire-type enums above)
 template<typename T>
-concept enumeration = std::is_enum_v<T> && !numeric_enum<T>;
+concept enumeration = std::is_enum_v<T> && !numeric_enum<T> && !std::is_same_v<T, std::byte>;
 
 /// Varint-encoded types (wire type 0, no zigzag)
 template<typename T>
@@ -145,7 +145,7 @@ template<typename C>
 concept resizable = requires(C c) { c.resize(std::size_t{1U}); };
 
 template<typename E>
-concept elementary = std::default_initializable<E>
+concept elementary = std::is_default_constructible_v<E>
     && requires(E& dst, E src) { dst = std::move(src); };
 
 /// Fixed-size array or non-resizable output range of elementary elements
@@ -190,7 +190,7 @@ concept packable = container<A> && scalar<typename A::value_type>;
 
 //
 template<typename T>
-concept string_like = std::is_convertible_v<T, std::string_view> && requires(T& s) {
+concept string_like = std::is_convertible_v<T, std::string_view> && requires(std::remove_cvref_t<T>& s) {
   s.resize(1Z);
 };
 
@@ -495,6 +495,9 @@ concept message = std::is_class_v<std::remove_cvref_t<Message>>
     && (detail::has_model<Message> || detail::has_external_model<Message>)
     && detail::is_fields_type<model<Message>>::value;
 
+template<typename Message>
+concept empty_message = message<Message> && (model<Message>::field_count == 0);
+
 template<message Message>
 class deserialize_result : private detail::result_for<model<Message>>::type {
 public:
@@ -685,10 +688,8 @@ deserialize_message(std::istream& in, Message& msg,
 /// Forward declaration so optional<T>/unique_ptr<T> overloads can call it.
 template<proto23::message Message>
 [[nodiscard]] field_result deserialize(std::istream& in, Message& msg);
-template<class Message>
-requires (std::is_empty_v<Message>)
+template<empty_message Message>
 [[nodiscard]] field_result deserialize(std::istream& in, Message& msg);
-
 
 template<typename Dest>
 constexpr auto ptr_cast(auto pointer) {
@@ -782,7 +783,7 @@ template<contiguous_resizable_array Array>
     const std::size_t excessive = count > v.max_size() ? (count - v.max_size()) : 0Z;
     count -= excessive;
     v.resize(count);
-    in.read(ptr_cast<char*>(v.data()), static_cast<std::streamsize>(len));
+    in.read(ptr_cast<char*>(v.data()), static_cast<std::streamsize>(count * sizeof(typename Array::value_type)));
     if (excessive == 0) return { quantity::some, {} };
     in.ignore(static_cast<std::streamsize>(excessive * sizeof(typename Array::value_type)));
     return { quantity::some, parse_error::array_overrun };
@@ -837,7 +838,7 @@ template<associative Container>
 
 template<typename T>
 [[nodiscard]] field_result deserialize(std::istream& in, std::optional<T>& v) {
-    v.emplace();
+    v.emplace(T{});
     return deserialize(in, *v);
 }
 
@@ -866,8 +867,7 @@ template<proto23::message Message>
 
 // --- Empty message: reads the length prefix then ignore the message body
 
-template<class Message>
-requires (std::is_empty_v<Message>)
+template<empty_message Message>
 [[nodiscard]] field_result deserialize(std::istream& in, Message&) {
     in.ignore(static_cast<std::streamsize>(read_length(in)));
     return field_result { quantity::some, {} };
@@ -1166,8 +1166,7 @@ template<proto23::message Msg>
 void serialize_value(std::ostream& out, int num, const Msg& msg, skippable mayskip);
 
 /// Empty messages
-template<class Msg>
-requires (std::is_empty_v<Msg>)
+template<empty_message Msg>
 void serialize_value(std::ostream& out, int num, const Msg&, skippable mayskip) {
     if (mayskip == skippable::yes) return;
     write_id_type(out, num, data_type::lengthy);
@@ -1300,16 +1299,25 @@ void write_packed_elem(std::ostream& buf, const E& elem) {
     }
 }
 
+// packed array with computable size
+template<packed_t Pack, contiguous_resizable_array C>
+requires (Pack != packed_t::no)
+void serialize_container(std::ostream& out, int num, const C& v) {
+    const proto23::detail::length_type length = v.size() * sizeof(typename C::value_type);
+    write_id_type(out, num, data_type::lengthy);
+    write_length(out, length);
+    out.write(static_cast<const char*>(static_cast<const void*>(v.data())), static_cast<std::streamsize>(length));
+}
+
 template<packed_t Pack, container C>
 void serialize_container(std::ostream& out, int num, const C& v) {
     if (v.empty()) { return; }
-
     if constexpr (unpacked<Pack, C>) {
         // Unpacked: one tag per element
         for (const auto& elem : v) { serialize_value(out, num, elem, skippable::no); }
     } else {
         // Packed: one tag, then all elements
-        proto23::inplace_buffer<inplace_buf_size<C>> buf; // FIXME packed array should have a computable size
+        proto23::inplace_buffer<inplace_buf_size<C>> buf;
         std::ostream tmp(&buf);
         for (const auto& elem : v) { write_packed_elem(tmp, elem); }
         write_id_type(out, num, data_type::lengthy);
