@@ -1,4 +1,5 @@
 #include "inplace_traits.h"
+#include "harness.h"
 #include <proto23_inplace_file_test.proto23.h>
 #include <proto23_inplace_test.proto23.h>
 
@@ -45,3 +46,8 @@ static_assert(!is_inplace_vector<decltype(ExplicitNotInplace::vector_Inner)>::va
 static_assert(!is_inplace_string<decltype(ExplicitNotInplace::std_string_200)>::value);
 static_assert(!is_inplace_vector<decltype(ExplicitNotInplace::std_vector_NotComplete)>::value);
 
+namespace {
+[[maybe_unused]] void compile_roundtrip(std::istream& in, std::ostream& out) {
+    testing::harness::all<ExplicitInplace, ExplicitNotInplace, InplaceByFileDefaultTest, InplaceByDefaultTest>(in, out);
+}
+} // namespace

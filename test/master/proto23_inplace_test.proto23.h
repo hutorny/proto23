@@ -86,9 +86,9 @@ struct ExplicitInplace {
         proto23::Field<&ExplicitInplace::unique_ptr_NotComplete2, 8>,
         proto23::Field<&ExplicitInplace::optional_and_, 9>,
         proto23::Field<&ExplicitInplace::inplace_and_, 10>,
-        proto23::Field<&ExplicitInplace::inplace_vector_Inner, 11, proto23::packed_t::no>,
+        proto23::Field<&ExplicitInplace::inplace_vector_Inner, 11>,
         proto23::Field<&ExplicitInplace::inplace_string_200, 12>,
-        proto23::Field<&ExplicitInplace::std_vector_NotComplete, 13, proto23::packed_t::no>>;
+        proto23::Field<&ExplicitInplace::std_vector_NotComplete, 13>>;
 };
 
 struct NotComplete {

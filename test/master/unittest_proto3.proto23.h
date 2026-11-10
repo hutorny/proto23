@@ -149,8 +149,8 @@ struct TestAllTypes {
         proto23::Field<&TestAllTypes::repeated_import_message, 50>,
         proto23::Field<&TestAllTypes::repeated_nested_enum, 51>,
         proto23::Field<&TestAllTypes::repeated_foreign_enum, 52>,
-        proto23::Field<&TestAllTypes::repeated_string_piece, 54, proto23::packed_t::no>,
-        proto23::Field<&TestAllTypes::repeated_cord, 55, proto23::packed_t::no>,
+        proto23::Field<&TestAllTypes::repeated_string_piece, 54>,
+        proto23::Field<&TestAllTypes::repeated_cord, 55>,
         proto23::Field<&TestAllTypes::repeated_lazy_message, 57>,
         proto23::OneOf<&TestAllTypes::oneof_field, 111, 112, 113, 114>>;
 };
@@ -172,20 +172,20 @@ struct TestPackedTypes {
     std::vector<ForeignEnum> packed_enum{};
 
     using Model = proto23::Fields<
-        proto23::Field<&TestPackedTypes::packed_int32, 90>,
-        proto23::Field<&TestPackedTypes::packed_int64, 91>,
-        proto23::Field<&TestPackedTypes::packed_uint32, 92>,
-        proto23::Field<&TestPackedTypes::packed_uint64, 93>,
-        proto23::Field<&TestPackedTypes::packed_sint32, 94>,
-        proto23::Field<&TestPackedTypes::packed_sint64, 95>,
-        proto23::Field<&TestPackedTypes::packed_fixed32, 96>,
-        proto23::Field<&TestPackedTypes::packed_fixed64, 97>,
-        proto23::Field<&TestPackedTypes::packed_sfixed32, 98>,
-        proto23::Field<&TestPackedTypes::packed_sfixed64, 99>,
-        proto23::Field<&TestPackedTypes::packed_float, 100>,
-        proto23::Field<&TestPackedTypes::packed_double, 101>,
-        proto23::Field<&TestPackedTypes::packed_bool, 102>,
-        proto23::Field<&TestPackedTypes::packed_enum, 103>>;
+        proto23::Field<&TestPackedTypes::packed_int32, 90, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_int64, 91, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_uint32, 92, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_uint64, 93, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_sint32, 94, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_sint64, 95, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_fixed32, 96, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_fixed64, 97, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_sfixed32, 98, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_sfixed64, 99, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_float, 100, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_double, 101, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_bool, 102, proto23::packed_t::yes>,
+        proto23::Field<&TestPackedTypes::packed_enum, 103, proto23::packed_t::yes>>;
 };
 
 struct TestUnpackedTypes {
@@ -238,7 +238,7 @@ struct ForeignMessage {
 };
 
 struct TestEmptyMessage {
-    // This message has no fields
+    using Model = proto23::Fields<>; // This message has no fields
 };
 
 struct TestMessageWithDummy {

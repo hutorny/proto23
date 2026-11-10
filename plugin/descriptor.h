@@ -90,7 +90,7 @@ struct OneofDescriptorProto {
 struct FieldOptions {
     proto23::options::Inplace inplace{};                     // field 68000
     std::uint32_t capacity{};                                // field 68001
-    bool packed{};                                           // field 2
+    std::optional<bool> packed{};                            // field 2
     bool deprecated{};                                       // field 3
     using Model = proto23::Fields<
         proto23::Field<&FieldOptions::packed, 2>,

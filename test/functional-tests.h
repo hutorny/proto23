@@ -43,12 +43,18 @@ inline constexpr auto tostr(const string& value) { return value; }
 constexpr auto tostr(detail::arithmetic auto value) requires is_enum_v<decltype(value)> {
   return to_string(static_cast<underlying_type_t<decltype(value)>>(value));
 }
+constexpr std::string tostr(std::byte value);
+template<typename T>
+requires (std::is_same_v<double, std::remove_cvref_t<T>> || std::is_same_v<float, std::remove_cvref_t<T>>)
+constexpr std::string tostr(T value) { return std::to_string(value); }
 constexpr auto tostr(auto value) requires is_pointer_v<decltype(value)> { return tostr(*value); }
 constexpr auto tostr(collection auto value) { return tostr(*begin(value)); }
+constexpr auto tostr(proto23::detail::string_like auto str) { return str; }
 constexpr auto tostr(detail::associative auto value) { return tostr(begin(value)->first); }
-constexpr auto tostr(auto value) { return to_string(value); }
+constexpr auto tostr(auto value) { return std::to_string(value); }
 template<typename Type>
 constexpr auto tostr(const std::optional<Type>& value) { return value ? tostr(*value) : ""s; }
+std::ostream& operator<<(std::ostream& out, std::byte value);
 
 constexpr auto& operator<<(std::ostream& out, detail::enumeration auto value) {
   return out << tostr(value);
@@ -117,6 +123,10 @@ auto& operator<<(std::ostream& out, const std::optional<Type>& value) {
 template<std::size_t N>
 auto& operator<<(std::ostream& out, const std::array<char, N>& value) {
   return out << string_view(begin(value), end(value));
+}
+
+inline std::ostream& operator<<(std::ostream& out, std::byte value) {
+  return out << tostr(value);
 }
 
 class ostream_printer {
@@ -212,6 +222,14 @@ inline std::string to_hex(std::uint8_t c, char delim = 0) {
     return { delim, hex(c >> 4), hex(c & 0xF) };
   else
     return { hex(c >> 4), hex(c & 0xF) };
+}
+
+inline constexpr std::string tostr(std::byte b) {
+    return to_hex(static_cast<std::uint8_t>(b));
+}
+
+inline constexpr std::string tostr(double value) {
+    return std::to_string(value);
 }
 
 inline auto dump(std::string_view str) {
