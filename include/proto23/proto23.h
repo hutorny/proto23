@@ -145,7 +145,7 @@ template<typename C>
 concept resizable = requires(C c) { c.resize(std::size_t{1U}); };
 
 template<typename E>
-concept elementary = std::default_initializable<E>
+concept elementary = std::is_default_constructible_v<E>
     && requires(E& dst, E src) { dst = std::move(src); };
 
 /// Fixed-size array or non-resizable output range of elementary elements
@@ -190,7 +190,7 @@ concept packable = container<A> && scalar<typename A::value_type>;
 
 //
 template<typename T>
-concept string_like = std::is_convertible_v<T, std::string_view> && requires(T& s) {
+concept string_like = std::is_convertible_v<T, std::string_view> && requires(std::remove_cvref_t<T>& s) {
   s.resize(1Z);
 };
 
@@ -837,7 +837,7 @@ template<associative Container>
 
 template<typename T>
 [[nodiscard]] field_result deserialize(std::istream& in, std::optional<T>& v) {
-    v.emplace();
+    v.emplace(T{});
     return deserialize(in, *v);
 }
 
