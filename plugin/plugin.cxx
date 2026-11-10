@@ -111,7 +111,8 @@ static std::string scalar_cpp_type(std::int32_t t) {
 
 
 static std::string_view packed_attr(bool rep, const std::optional<pb::FieldOptions>& options) {
-  return (rep && options && !options->packed) ? std::string_view{", proto23::packed_t::no"} : std::string_view{};
+    if (!rep || !options || !options->packed) return std::string_view{};
+    return options->packed.value() ? ", proto23::packed_t::yes" : ", proto23::packed_t::no";
 }
 
 /// Return the element type for a single-value occurrence of the field
@@ -461,7 +462,7 @@ private:
         }
 
         if (msg.field.empty()) {
-          out << ind(depth + 1) << "// This message has no fields\n";
+            out << ind(depth + 1) << "using Model = proto23::Fields<>; // This message has no fields\n";
         } else {
             // using Model = proto23::Fields<...>
             out << "\n" << ind(depth + 1) << "using Model = proto23::Fields<\n";

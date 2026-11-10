@@ -399,7 +399,6 @@ template<typename T> struct is_fields_type     : std::false_type {};
 ///   };
 /// @endcode
 template<typename... FieldDescs>
-requires (sizeof...(FieldDescs) !=0 )
 struct Fields {
     using fields_tuple = std::tuple<FieldDescs...>;
     static constexpr std::size_t field_count = sizeof...(FieldDescs);
@@ -721,21 +720,6 @@ template<fixed_arithmetic T>
     return { quantity::some, {} };
 }
 
-// --- Wrappers ---
-
-template<typename T>
-[[nodiscard]] field_result deserialize(std::istream& in, std::optional<T>& v) {
-    v.emplace();
-    return deserialize(in, *v);
-}
-
-template<typename T>
-[[nodiscard]] field_result deserialize(std::istream& in, std::unique_ptr<T>& v) {
-    v = std::make_unique<T>();
-    const auto r = deserialize(in, *v);
-    return { quantity::some, r.errors };
-}
-
 // --- String types ---
 template<string_like String>
 [[nodiscard]] inline field_result deserialize(std::istream& in, String& v) {
@@ -847,6 +831,21 @@ template<associative Container>
         v.emplace(std::make_pair(std::move(entry.key), std::move(entry.value)));
     }
     return { any(r) ? quantity::some : quantity::none, r.errors() };
+}
+
+// --- Wrappers ---
+
+template<typename T>
+[[nodiscard]] field_result deserialize(std::istream& in, std::optional<T>& v) {
+    v.emplace();
+    return deserialize(in, *v);
+}
+
+template<typename T>
+[[nodiscard]] field_result deserialize(std::istream& in, std::unique_ptr<T>& v) {
+    v = std::make_unique<T>();
+    const auto r = deserialize(in, *v);
+    return { quantity::some, r.errors };
 }
 
 // --- Nested message: reads the length prefix then the message body
