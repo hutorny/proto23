@@ -25,6 +25,7 @@ enum class Inplace {
     NO = 2,
 };
 static constexpr int MESSAGE_ID_NUM = 68228;
+static constexpr int LABEL_ID_NUM = 68227;
 } // namespace proto23::options
 
 namespace pb {
@@ -39,9 +40,11 @@ struct EnumOptions {
 };
 
 struct EnumValueOptions {
+    std::string label{};
     bool deprecated{};
 
     using Model = proto23::Fields<
+        proto23::Field<&EnumValueOptions::label, proto23::options::LABEL_ID_NUM>,
         proto23::Field<&EnumValueOptions::deprecated, 1>>;
 };
 
