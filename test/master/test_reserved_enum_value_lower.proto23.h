@@ -106,6 +106,9 @@ namespace proto23 {
 
 template<>
 struct enum_traits<lower_enum_value::NotAllowed> : 
-    proto23::detail::make_enum_traits<lower_enum_value::NotAllowed,0,79,80,127U,false>{};
+    proto23::detail::make_enum_traits<lower_enum_value::NotAllowed,0,79,80,127U,false> {
+    static constexpr std::string_view name(lower_enum_value::NotAllowed value) noexcept;
+    static constexpr std::string_view label(lower_enum_value::NotAllowed value) noexcept;
+};
 
 }

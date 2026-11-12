@@ -1,4 +1,5 @@
 #include "test_reserved_enum_lower.proto23.h"
+#include "test_reserved_enum_lower.proto23.hpp"
 #include "test_reserved_enum_upper.proto23.h"
 #include "test_reserved_enum_value_lower.proto23.h"
 #include "test_reserved_enum_value_upper.proto23.h"

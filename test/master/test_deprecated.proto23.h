@@ -49,9 +49,15 @@ namespace proto23 {
 
 template<>
 struct enum_traits<test::TestDeprecatedEnum> : 
-    proto23::detail::make_enum_traits<test::TestDeprecatedEnum,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<test::TestDeprecatedEnum,0,0,1,0U,true> {
+    static constexpr std::string_view name(test::TestDeprecatedEnum value) noexcept;
+    static constexpr std::string_view label(test::TestDeprecatedEnum value) noexcept;
+};
 template<>
 struct enum_traits<test::TestDeprecatedEnumValue> : 
-    proto23::detail::make_enum_traits<test::TestDeprecatedEnumValue,0,1,2,1U,true>{};
+    proto23::detail::make_enum_traits<test::TestDeprecatedEnumValue,0,1,2,1U,true> {
+    static constexpr std::string_view name(test::TestDeprecatedEnumValue value) noexcept;
+    static constexpr std::string_view label(test::TestDeprecatedEnumValue value) noexcept;
+};
 
 }

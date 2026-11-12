@@ -14,3 +14,8 @@ extend google.protobuf.MessageOptions {
   // Message ID
   MessageTypeID MESSAGE_ID = 68228;
 }
+
+extend google.protobuf.EnumValueOptions {
+  // Label
+  string label = 68227;
+}

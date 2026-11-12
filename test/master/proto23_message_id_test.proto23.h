@@ -21,6 +21,12 @@ namespace test {
 
 struct MessageIDTest;
 
+enum class EnumLabelTest : std::int32_t {
+    ENUM_LABEL_TEST_UNSPECIFIED = 0,
+    ENUM_LABEL_TEST_NOLABEL = 1,
+    ENUM_LABEL_TEST_LABEL = 2,
+};
+
 struct MessageIDTest {
     std::uint32_t v{};
 
@@ -30,3 +36,14 @@ struct MessageIDTest {
 };
 
 } // namespace test
+
+namespace proto23 {
+
+template<>
+struct enum_traits<test::EnumLabelTest> : 
+    proto23::detail::make_enum_traits<test::EnumLabelTest,0,2,3,3U,true> {
+    static constexpr std::string_view name(test::EnumLabelTest value) noexcept;
+    static constexpr std::string_view label(test::EnumLabelTest value) noexcept;
+};
+
+}

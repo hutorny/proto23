@@ -50,6 +50,9 @@ namespace proto23 {
 
 template<>
 struct enum_traits<P::Enum> : 
-    proto23::detail::make_enum_traits<P::Enum,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<P::Enum,0,0,1,0U,true> {
+    static constexpr std::string_view name(P::Enum value) noexcept;
+    static constexpr std::string_view label(P::Enum value) noexcept;
+};
 
 }

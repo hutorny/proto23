@@ -8,3 +8,9 @@ message MessageIDTest {
   option (test_options.MESSAGE_ID) = FOO;
   uint32 v = 1;
 }
+
+enum EnumLabelTest {
+    ENUM_LABEL_TEST_UNSPECIFIED = 0;
+    ENUM_LABEL_TEST_NOLABEL = 1;
+    ENUM_LABEL_TEST_LABEL = 2 [(test_options.label) = "Label"];
+}
