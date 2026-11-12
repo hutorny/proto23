@@ -31,6 +31,9 @@ namespace proto23 {
 
 template<>
 struct enum_traits<test_options::MessageTypeID> : 
-    proto23::detail::make_enum_traits<test_options::MessageTypeID,0,2,3,3U,true>{};
+    proto23::detail::make_enum_traits<test_options::MessageTypeID,0,2,3,3U,true> {
+    constexpr std::string_view name(test_options::MessageTypeID value) const noexcept;
+    constexpr std::string_view label(test_options::MessageTypeID value) const noexcept;
+};
 
 }

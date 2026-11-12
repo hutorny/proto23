@@ -1,4 +1,4 @@
-#include "packed_field_test.proto23.h"
+#include "packed_field_test.proto23.hpp"
 #include "harness.h"
 
 namespace {

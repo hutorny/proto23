@@ -189,9 +189,15 @@ namespace proto23 {
 
 template<>
 struct enum_traits<::Message3::Enum> : 
-    proto23::detail::make_enum_traits<::Message3::Enum,0,30,4,31U,false>{};
+    proto23::detail::make_enum_traits<::Message3::Enum,0,30,4,31U,false> {
+    constexpr std::string_view name(::Message3::Enum value) const noexcept;
+    constexpr std::string_view label(::Message3::Enum value) const noexcept;
+};
 template<>
 struct enum_traits<::Message3Optional::Enum> : 
-    proto23::detail::make_enum_traits<::Message3Optional::Enum,0,30,4,31U,false>{};
+    proto23::detail::make_enum_traits<::Message3Optional::Enum,0,30,4,31U,false> {
+    constexpr std::string_view name(::Message3Optional::Enum value) const noexcept;
+    constexpr std::string_view label(::Message3Optional::Enum value) const noexcept;
+};
 
 }

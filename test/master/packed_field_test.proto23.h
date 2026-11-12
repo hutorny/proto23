@@ -98,6 +98,9 @@ namespace proto23 {
 
 template<>
 struct enum_traits<google::protobuf::python::internal::TestPackedTypes::NestedEnum> : 
-    proto23::detail::make_enum_traits<google::protobuf::python::internal::TestPackedTypes::NestedEnum,0,2,3,3U,true>{};
+    proto23::detail::make_enum_traits<google::protobuf::python::internal::TestPackedTypes::NestedEnum,0,2,3,3U,true> {
+    constexpr std::string_view name(google::protobuf::python::internal::TestPackedTypes::NestedEnum value) const noexcept;
+    constexpr std::string_view label(google::protobuf::python::internal::TestPackedTypes::NestedEnum value) const noexcept;
+};
 
 }

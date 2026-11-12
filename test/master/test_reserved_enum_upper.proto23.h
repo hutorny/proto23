@@ -343,243 +343,483 @@ namespace proto23 {
 
 template<>
 struct enum_traits<upper_enum::ABSTRACT> : 
-    proto23::detail::make_enum_traits<upper_enum::ABSTRACT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ABSTRACT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ABSTRACT value) const noexcept;
+    constexpr std::string_view label(upper_enum::ABSTRACT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::AND> : 
-    proto23::detail::make_enum_traits<upper_enum::AND,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::AND,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::AND value) const noexcept;
+    constexpr std::string_view label(upper_enum::AND value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ARRAY> : 
-    proto23::detail::make_enum_traits<upper_enum::ARRAY,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ARRAY,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ARRAY value) const noexcept;
+    constexpr std::string_view label(upper_enum::ARRAY value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::AS> : 
-    proto23::detail::make_enum_traits<upper_enum::AS,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::AS,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::AS value) const noexcept;
+    constexpr std::string_view label(upper_enum::AS value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::BREAK> : 
-    proto23::detail::make_enum_traits<upper_enum::BREAK,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::BREAK,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::BREAK value) const noexcept;
+    constexpr std::string_view label(upper_enum::BREAK value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::CALLABLE> : 
-    proto23::detail::make_enum_traits<upper_enum::CALLABLE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::CALLABLE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::CALLABLE value) const noexcept;
+    constexpr std::string_view label(upper_enum::CALLABLE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::CASE> : 
-    proto23::detail::make_enum_traits<upper_enum::CASE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::CASE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::CASE value) const noexcept;
+    constexpr std::string_view label(upper_enum::CASE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::CATCH> : 
-    proto23::detail::make_enum_traits<upper_enum::CATCH,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::CATCH,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::CATCH value) const noexcept;
+    constexpr std::string_view label(upper_enum::CATCH value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::CLASS> : 
-    proto23::detail::make_enum_traits<upper_enum::CLASS,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::CLASS,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::CLASS value) const noexcept;
+    constexpr std::string_view label(upper_enum::CLASS value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::CLONE> : 
-    proto23::detail::make_enum_traits<upper_enum::CLONE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::CLONE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::CLONE value) const noexcept;
+    constexpr std::string_view label(upper_enum::CLONE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::CONST> : 
-    proto23::detail::make_enum_traits<upper_enum::CONST,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::CONST,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::CONST value) const noexcept;
+    constexpr std::string_view label(upper_enum::CONST value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::CONTINUE> : 
-    proto23::detail::make_enum_traits<upper_enum::CONTINUE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::CONTINUE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::CONTINUE value) const noexcept;
+    constexpr std::string_view label(upper_enum::CONTINUE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::DECLARE> : 
-    proto23::detail::make_enum_traits<upper_enum::DECLARE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::DECLARE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::DECLARE value) const noexcept;
+    constexpr std::string_view label(upper_enum::DECLARE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::DEFAULT> : 
-    proto23::detail::make_enum_traits<upper_enum::DEFAULT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::DEFAULT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::DEFAULT value) const noexcept;
+    constexpr std::string_view label(upper_enum::DEFAULT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::DIE> : 
-    proto23::detail::make_enum_traits<upper_enum::DIE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::DIE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::DIE value) const noexcept;
+    constexpr std::string_view label(upper_enum::DIE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::DO> : 
-    proto23::detail::make_enum_traits<upper_enum::DO,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::DO,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::DO value) const noexcept;
+    constexpr std::string_view label(upper_enum::DO value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ECHO> : 
-    proto23::detail::make_enum_traits<upper_enum::ECHO,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ECHO,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ECHO value) const noexcept;
+    constexpr std::string_view label(upper_enum::ECHO value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ELSE> : 
-    proto23::detail::make_enum_traits<upper_enum::ELSE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ELSE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ELSE value) const noexcept;
+    constexpr std::string_view label(upper_enum::ELSE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ELSEIF> : 
-    proto23::detail::make_enum_traits<upper_enum::ELSEIF,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ELSEIF,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ELSEIF value) const noexcept;
+    constexpr std::string_view label(upper_enum::ELSEIF value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::EMPTY> : 
-    proto23::detail::make_enum_traits<upper_enum::EMPTY,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::EMPTY,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::EMPTY value) const noexcept;
+    constexpr std::string_view label(upper_enum::EMPTY value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ENDDECLARE> : 
-    proto23::detail::make_enum_traits<upper_enum::ENDDECLARE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ENDDECLARE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ENDDECLARE value) const noexcept;
+    constexpr std::string_view label(upper_enum::ENDDECLARE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ENDFOR> : 
-    proto23::detail::make_enum_traits<upper_enum::ENDFOR,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ENDFOR,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ENDFOR value) const noexcept;
+    constexpr std::string_view label(upper_enum::ENDFOR value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ENDFOREACH> : 
-    proto23::detail::make_enum_traits<upper_enum::ENDFOREACH,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ENDFOREACH,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ENDFOREACH value) const noexcept;
+    constexpr std::string_view label(upper_enum::ENDFOREACH value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ENDIF> : 
-    proto23::detail::make_enum_traits<upper_enum::ENDIF,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ENDIF,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ENDIF value) const noexcept;
+    constexpr std::string_view label(upper_enum::ENDIF value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ENDSWITCH> : 
-    proto23::detail::make_enum_traits<upper_enum::ENDSWITCH,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ENDSWITCH,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ENDSWITCH value) const noexcept;
+    constexpr std::string_view label(upper_enum::ENDSWITCH value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ENDWHILE> : 
-    proto23::detail::make_enum_traits<upper_enum::ENDWHILE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ENDWHILE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ENDWHILE value) const noexcept;
+    constexpr std::string_view label(upper_enum::ENDWHILE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::EVAL> : 
-    proto23::detail::make_enum_traits<upper_enum::EVAL,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::EVAL,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::EVAL value) const noexcept;
+    constexpr std::string_view label(upper_enum::EVAL value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::EXIT> : 
-    proto23::detail::make_enum_traits<upper_enum::EXIT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::EXIT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::EXIT value) const noexcept;
+    constexpr std::string_view label(upper_enum::EXIT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::EXTENDS> : 
-    proto23::detail::make_enum_traits<upper_enum::EXTENDS,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::EXTENDS,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::EXTENDS value) const noexcept;
+    constexpr std::string_view label(upper_enum::EXTENDS value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FINAL> : 
-    proto23::detail::make_enum_traits<upper_enum::FINAL,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FINAL,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FINAL value) const noexcept;
+    constexpr std::string_view label(upper_enum::FINAL value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FINALLY> : 
-    proto23::detail::make_enum_traits<upper_enum::FINALLY,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FINALLY,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FINALLY value) const noexcept;
+    constexpr std::string_view label(upper_enum::FINALLY value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FN> : 
-    proto23::detail::make_enum_traits<upper_enum::FN,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FN,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FN value) const noexcept;
+    constexpr std::string_view label(upper_enum::FN value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FOR> : 
-    proto23::detail::make_enum_traits<upper_enum::FOR,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FOR,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FOR value) const noexcept;
+    constexpr std::string_view label(upper_enum::FOR value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FOREACH> : 
-    proto23::detail::make_enum_traits<upper_enum::FOREACH,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FOREACH,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FOREACH value) const noexcept;
+    constexpr std::string_view label(upper_enum::FOREACH value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FUNCTION> : 
-    proto23::detail::make_enum_traits<upper_enum::FUNCTION,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FUNCTION,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FUNCTION value) const noexcept;
+    constexpr std::string_view label(upper_enum::FUNCTION value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::GLOBAL> : 
-    proto23::detail::make_enum_traits<upper_enum::GLOBAL,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::GLOBAL,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::GLOBAL value) const noexcept;
+    constexpr std::string_view label(upper_enum::GLOBAL value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::GOTO> : 
-    proto23::detail::make_enum_traits<upper_enum::GOTO,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::GOTO,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::GOTO value) const noexcept;
+    constexpr std::string_view label(upper_enum::GOTO value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::IF> : 
-    proto23::detail::make_enum_traits<upper_enum::IF,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::IF,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::IF value) const noexcept;
+    constexpr std::string_view label(upper_enum::IF value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::IMPLEMENTS> : 
-    proto23::detail::make_enum_traits<upper_enum::IMPLEMENTS,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::IMPLEMENTS,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::IMPLEMENTS value) const noexcept;
+    constexpr std::string_view label(upper_enum::IMPLEMENTS value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::INCLUDE> : 
-    proto23::detail::make_enum_traits<upper_enum::INCLUDE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::INCLUDE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::INCLUDE value) const noexcept;
+    constexpr std::string_view label(upper_enum::INCLUDE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::INCLUDE_ONCE> : 
-    proto23::detail::make_enum_traits<upper_enum::INCLUDE_ONCE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::INCLUDE_ONCE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::INCLUDE_ONCE value) const noexcept;
+    constexpr std::string_view label(upper_enum::INCLUDE_ONCE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::INSTANCEOF> : 
-    proto23::detail::make_enum_traits<upper_enum::INSTANCEOF,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::INSTANCEOF,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::INSTANCEOF value) const noexcept;
+    constexpr std::string_view label(upper_enum::INSTANCEOF value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::INSTEADOF> : 
-    proto23::detail::make_enum_traits<upper_enum::INSTEADOF,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::INSTEADOF,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::INSTEADOF value) const noexcept;
+    constexpr std::string_view label(upper_enum::INSTEADOF value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::INTERFACE> : 
-    proto23::detail::make_enum_traits<upper_enum::INTERFACE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::INTERFACE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::INTERFACE value) const noexcept;
+    constexpr std::string_view label(upper_enum::INTERFACE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ISSET> : 
-    proto23::detail::make_enum_traits<upper_enum::ISSET,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ISSET,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ISSET value) const noexcept;
+    constexpr std::string_view label(upper_enum::ISSET value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::LIST> : 
-    proto23::detail::make_enum_traits<upper_enum::LIST,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::LIST,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::LIST value) const noexcept;
+    constexpr std::string_view label(upper_enum::LIST value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::MATCH> : 
-    proto23::detail::make_enum_traits<upper_enum::MATCH,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::MATCH,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::MATCH value) const noexcept;
+    constexpr std::string_view label(upper_enum::MATCH value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::NAMESPACE> : 
-    proto23::detail::make_enum_traits<upper_enum::NAMESPACE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::NAMESPACE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::NAMESPACE value) const noexcept;
+    constexpr std::string_view label(upper_enum::NAMESPACE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::NEW> : 
-    proto23::detail::make_enum_traits<upper_enum::NEW,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::NEW,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::NEW value) const noexcept;
+    constexpr std::string_view label(upper_enum::NEW value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::OR> : 
-    proto23::detail::make_enum_traits<upper_enum::OR,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::OR,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::OR value) const noexcept;
+    constexpr std::string_view label(upper_enum::OR value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::PARENT> : 
-    proto23::detail::make_enum_traits<upper_enum::PARENT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::PARENT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::PARENT value) const noexcept;
+    constexpr std::string_view label(upper_enum::PARENT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::PRINT> : 
-    proto23::detail::make_enum_traits<upper_enum::PRINT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::PRINT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::PRINT value) const noexcept;
+    constexpr std::string_view label(upper_enum::PRINT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::PRIVATE> : 
-    proto23::detail::make_enum_traits<upper_enum::PRIVATE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::PRIVATE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::PRIVATE value) const noexcept;
+    constexpr std::string_view label(upper_enum::PRIVATE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::PROTECTED> : 
-    proto23::detail::make_enum_traits<upper_enum::PROTECTED,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::PROTECTED,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::PROTECTED value) const noexcept;
+    constexpr std::string_view label(upper_enum::PROTECTED value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::PUBLIC> : 
-    proto23::detail::make_enum_traits<upper_enum::PUBLIC,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::PUBLIC,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::PUBLIC value) const noexcept;
+    constexpr std::string_view label(upper_enum::PUBLIC value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::READONLY> : 
-    proto23::detail::make_enum_traits<upper_enum::READONLY,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::READONLY,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::READONLY value) const noexcept;
+    constexpr std::string_view label(upper_enum::READONLY value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::REQUIRE> : 
-    proto23::detail::make_enum_traits<upper_enum::REQUIRE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::REQUIRE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::REQUIRE value) const noexcept;
+    constexpr std::string_view label(upper_enum::REQUIRE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::REQUIRE_ONCE> : 
-    proto23::detail::make_enum_traits<upper_enum::REQUIRE_ONCE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::REQUIRE_ONCE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::REQUIRE_ONCE value) const noexcept;
+    constexpr std::string_view label(upper_enum::REQUIRE_ONCE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::RETURN> : 
-    proto23::detail::make_enum_traits<upper_enum::RETURN,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::RETURN,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::RETURN value) const noexcept;
+    constexpr std::string_view label(upper_enum::RETURN value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::SELF> : 
-    proto23::detail::make_enum_traits<upper_enum::SELF,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::SELF,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::SELF value) const noexcept;
+    constexpr std::string_view label(upper_enum::SELF value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::STATIC> : 
-    proto23::detail::make_enum_traits<upper_enum::STATIC,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::STATIC,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::STATIC value) const noexcept;
+    constexpr std::string_view label(upper_enum::STATIC value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::SWITCH> : 
-    proto23::detail::make_enum_traits<upper_enum::SWITCH,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::SWITCH,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::SWITCH value) const noexcept;
+    constexpr std::string_view label(upper_enum::SWITCH value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::THROW> : 
-    proto23::detail::make_enum_traits<upper_enum::THROW,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::THROW,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::THROW value) const noexcept;
+    constexpr std::string_view label(upper_enum::THROW value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::TRAIT> : 
-    proto23::detail::make_enum_traits<upper_enum::TRAIT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::TRAIT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::TRAIT value) const noexcept;
+    constexpr std::string_view label(upper_enum::TRAIT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::TRY> : 
-    proto23::detail::make_enum_traits<upper_enum::TRY,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::TRY,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::TRY value) const noexcept;
+    constexpr std::string_view label(upper_enum::TRY value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::UNSET> : 
-    proto23::detail::make_enum_traits<upper_enum::UNSET,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::UNSET,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::UNSET value) const noexcept;
+    constexpr std::string_view label(upper_enum::UNSET value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::USE> : 
-    proto23::detail::make_enum_traits<upper_enum::USE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::USE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::USE value) const noexcept;
+    constexpr std::string_view label(upper_enum::USE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::VAR> : 
-    proto23::detail::make_enum_traits<upper_enum::VAR,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::VAR,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::VAR value) const noexcept;
+    constexpr std::string_view label(upper_enum::VAR value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::WHILE> : 
-    proto23::detail::make_enum_traits<upper_enum::WHILE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::WHILE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::WHILE value) const noexcept;
+    constexpr std::string_view label(upper_enum::WHILE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::XOR> : 
-    proto23::detail::make_enum_traits<upper_enum::XOR,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::XOR,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::XOR value) const noexcept;
+    constexpr std::string_view label(upper_enum::XOR value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::YIELD> : 
-    proto23::detail::make_enum_traits<upper_enum::YIELD,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::YIELD,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::YIELD value) const noexcept;
+    constexpr std::string_view label(upper_enum::YIELD value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::INT> : 
-    proto23::detail::make_enum_traits<upper_enum::INT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::INT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::INT value) const noexcept;
+    constexpr std::string_view label(upper_enum::INT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FLOAT> : 
-    proto23::detail::make_enum_traits<upper_enum::FLOAT,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FLOAT,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FLOAT value) const noexcept;
+    constexpr std::string_view label(upper_enum::FLOAT value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::BOOL> : 
-    proto23::detail::make_enum_traits<upper_enum::BOOL,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::BOOL,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::BOOL value) const noexcept;
+    constexpr std::string_view label(upper_enum::BOOL value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::STRING> : 
-    proto23::detail::make_enum_traits<upper_enum::STRING,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::STRING,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::STRING value) const noexcept;
+    constexpr std::string_view label(upper_enum::STRING value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::TRUE> : 
-    proto23::detail::make_enum_traits<upper_enum::TRUE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::TRUE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::TRUE value) const noexcept;
+    constexpr std::string_view label(upper_enum::TRUE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::FALSE> : 
-    proto23::detail::make_enum_traits<upper_enum::FALSE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::FALSE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::FALSE value) const noexcept;
+    constexpr std::string_view label(upper_enum::FALSE value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::NULL_> : 
-    proto23::detail::make_enum_traits<upper_enum::NULL_,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::NULL_,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::NULL_ value) const noexcept;
+    constexpr std::string_view label(upper_enum::NULL_ value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::VOID> : 
-    proto23::detail::make_enum_traits<upper_enum::VOID,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::VOID,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::VOID value) const noexcept;
+    constexpr std::string_view label(upper_enum::VOID value) const noexcept;
+};
 template<>
 struct enum_traits<upper_enum::ITERABLE> : 
-    proto23::detail::make_enum_traits<upper_enum::ITERABLE,0,0,1,0U,true>{};
+    proto23::detail::make_enum_traits<upper_enum::ITERABLE,0,0,1,0U,true> {
+    constexpr std::string_view name(upper_enum::ITERABLE value) const noexcept;
+    constexpr std::string_view label(upper_enum::ITERABLE value) const noexcept;
+};
 
 }
