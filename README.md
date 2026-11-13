@@ -209,6 +209,78 @@ option (proto23.inplace_message) = YES;
 ```
 These options change default 
 
+## Enum traits
+
+For every enum the plugin generates a `proto23::enum_traits<E>` specialization
+(see `proto23/enum_traits.h`):
+
+```cpp
+using Traits = proto23::enum_traits<Color>;
+Traits::min();         // lowest value, as Color
+Traits::max();         // highest value, as Color
+Traits::count();       // number of values
+Traits::mask();        // bitwise OR of all values
+Traits::is_sequence;   // true if values are consecutive
+Traits::name(Color::COLOR_RED);   // "COLOR_RED"
+Traits::label(Color::COLOR_RED);  // "RED"
+```
+
+`name()` and `label()` return an empty `std::string_view` for unknown values.
+They are implemented in a separate generated file `<name>.proto23.hpp`, which the plugin writes
+next to `<name>.proto23.h` (include it where these functions are used).
+
+`label()` is chosen by priority:
+
+1. a custom `string` option on `google.protobuf.EnumValueOptions` with field number `68227`;
+2. the value name without the enum prefix (the text before `UNSPECIFIED`/`unspecified`/`Unspecified`
+   in the zero value, e.g. `COLOR_UNSPECIFIED` gives prefix `COLOR_`);
+3. the value name.
+
+```proto
+extend google.protobuf.EnumValueOptions { string label = 68227; }
+
+enum Color {
+  COLOR_UNSPECIFIED = 0;
+  COLOR_RED = 1 [(label) = "Red color"];
+}
+```
+
+## Deprecated
+
+The protobuf `deprecated` option on fields, messages, enums and enum values is translated into
+`[[deprecated]]` in the generated code (suppressed for protobuf core files).
+
+## Empty messages
+
+Messages without fields are supported: the plugin emits `using Model = proto23::Fields<>;`.
+An empty message is serialized as a zero-length field and skipped on input.
+An empty but present nested message is handled correctly and does not disturb the following fields.
+
+## Diagnostics
+
+Deserialization reports problems as `proto23::parse_error` flags. Use `proto23/diagnostic.h`
+to turn them into readable text:
+
+```cpp
+#include <proto23/diagnostic.h>
+
+auto result = proto23::deserialize(in, msg);
+std::cerr << proto23::diagnostic::explain(result.errors(), "; ") << '\n';
+```
+
+| Error              | Meaning                                                        |
+|--------------------|----------------------------------------------------------------|
+| `type_mismatch`    | input data type mismatches model data type: skipped            |
+| `integer_overflow` | integer value exceeded data type limit: clamped                |
+| `array_overrun`    | number of input elements exceed field capacity: skipped        |
+| `string_overrun`   | input string length exceed field capacity: skipped             |
+| `invalid_length`   | input string length out of range: stall                        |
+| `tellg_fail`       | input stream does not support `tellg()`: rejected              |
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
 ## Tested with
 
 ### Linux
