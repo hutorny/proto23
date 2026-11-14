@@ -820,18 +820,42 @@ template<bounded_array Array>
     return result;
 }
 
+// --- Map-entry field numbers
+inline constexpr int map_key_index = 1;
+inline constexpr int map_value_index = 2;
+
+// --- Map-entry helper
+template<typename Key, typename Value>
+result_type<2U> deserialize_map_entry(std::istream& in, Key& key, Value& value) {
+    result_type<2U> result {};
+    const auto end_pos = get_eod(in);
+    while (in.good() && get_pos(in) < end_pos)
+    {
+        const auto [id, wt] = read_id_type(in);
+        if (!in.good()) { break; }
+        if (id == map_key_index && matches<std::remove_cvref_t<Key>>(wt)) {
+          const auto res = deserialize(in, key);
+          result.set(1, res.errors);
+        } else if (id == map_value_index && matches<std::remove_cvref_t<Value>>(wt)) {
+          const auto res = detail::deserialize(in, value);
+          result.set(2, res.errors);
+        }
+    }
+    return result;
+}
 // --- Associative (map<K,V>): each invocation deserializes one entry
 
 template<associative Container>
 [[nodiscard]] field_result deserialize(std::istream& in, Container& v) {
     using Key   = std::remove_cvref_t<typename Container::key_type>;
     using Value = std::remove_cvref_t<typename Container::mapped_type>;
-    MapEntry<Key, Value> entry{};
-    const auto r = deserialize_message(in, entry, &get_eod);
-    if (any(r)) {
-        v.emplace(std::make_pair(std::move(entry.key), std::move(entry.value)));
+    Key key{};
+    Value value{};
+    const auto r = deserialize_map_entry(in, key, value);
+    if (r.any()) {
+        v.emplace(std::make_pair(std::move(key), std::move(value)));
     }
-    return { any(r) ? quantity::some : quantity::none, r.errors() };
+    return { r.any() ? quantity::some : quantity::none, r.errors() };
 }
 
 // --- Wrappers ---
@@ -960,6 +984,11 @@ template<typename FD, std::size_t Idx, typename Msg>
     }
 }
 
+template<typename Variant, std::size_t AltI>
+concept simply_emplaceble_alt = requires(Variant& var) {
+    var.template emplace<AltI>();
+};
+
 // OneOf<M, Ns...>: try each variant alternative in turn
 template<typename OD, std::size_t Idx, std::size_t AltI, typename Msg>
 [[nodiscard]] try_field_result try_oneof_alt(std::istream& in, Msg& msg,
@@ -970,7 +999,11 @@ template<typename OD, std::size_t Idx, std::size_t AltI, typename Msg>
         using Alt = std::variant_alternative_t<AltI, VType>;
         if (num == OD::nums[AltI] && matches<Alt>(wt)) {
             auto& var = msg.*OD::member;
-            var.template emplace<AltI>();
+            if constexpr (simply_emplaceble_alt<VType, AltI>) { // In some cases clang cannot simply emplace
+                var.template emplace<AltI>();
+            } else {
+                var.template emplace<AltI>(Alt{});
+            }
             return { deserialize(in, std::get<AltI>(var)), Idx };
         }
         return try_oneof_alt<OD, Idx, AltI + 1U>(in, msg, num, wt);
@@ -1206,24 +1239,27 @@ void serialize_value(std::ostream& out, int num, const Msg& msg, skippable maysk
         proto23::serialize(out, msg);
     }
 }
+// --- Map-entry helper
+template<typename Key, typename Value>
+void serialize_map_entry(std::ostream& out, const Key& key, const Value& value) {
+  serialize_value(out, map_key_index, key, skippable::yes);
+  serialize_value(out, map_value_index, value, skippable::yes);
+}
 
 // ---- associative (map) — each entry as embedded message ----
 
 template<associative Container>
 void serialize_value(std::ostream& out, int num, const Container& v, skippable) {
     for (const auto& [k, mv] : v) {
-        using Key   = std::remove_cvref_t<typename Container::key_type>;
-        using Value = std::remove_cvref_t<typename Container::mapped_type>;
-        MapEntry<Key, Value> entry{k, mv};
         proto23::inplace_buffer<inplace_buf_size<Container>> buf;
         std::ostream tmp(&buf);
-        proto23::serialize(tmp, entry);
+        serialize_map_entry(tmp, k, mv);
         write_id_type(out, num, data_type::lengthy);
         write_length(out, buf.size());
         if (!buf.overflowed()) {
             out.write(buf.data(), static_cast<std::streamsize>(buf.size()));
         } else {
-            proto23::serialize(out, entry);
+            serialize_map_entry(out, k, mv);
         }
     }
 }

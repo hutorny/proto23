@@ -1,4 +1,6 @@
 #include "unittest_proto3.proto23.h"
+#include "harness.h"
+
 #include <proto23/options.proto23.h>
 static_assert(std::is_trivially_copyable_v<proto23::inplace_string<64>>);
 static_assert(std::is_trivially_copyable_v<proto23::inplace_vector<long, 16>>);
@@ -11,3 +13,10 @@ static_assert(proto23::enum_traits<TestOneof2::NestedEnum>::max() == TestOneof2:
 static_assert(proto23::enum_traits<TestOneof2::NestedEnum>::mask() == 3);
 static_assert(proto23::enum_traits<TestOneof2::NestedEnum>::count() == 4);
 static_assert(proto23::enum_traits<TestOneof2::NestedEnum>::is_sequence);
+
+namespace {
+[[maybe_unused]] void compile_roundtrip(std::istream& in, std::ostream& out) {
+    testing::harness::all<ForeignMessage, TestMessageWithDummy, TestEmptyMessage, TestOneof2, TestAllTypes,
+                          TestPackedTypes, TestUnpackedTypes, NestedTestAllTypes, TestHasbits>(in, out);
+}
+} // namespace
